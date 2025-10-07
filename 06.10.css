@@ -22,18 +22,34 @@ h1 {
     
 }
 
+.europa-container {
+    grid-column: 1 / 2; 
+    grid-row: 2 / 3;
+    display: flex;
+    justify-content: flex-start; /* horizontal links */
+    align-items: flex-end;       /* vertikal unten */
+    height: 50%;                /* volle Höhe der Grid-Zelle */
+}
 
+.europa-container img {
+    width: 800px;   /* oder feste Breite, z.B. 800px */
+    height: auto;
+    max-width: 100%; /* passt sich der Zelle an */
+}
 
+/*
 
 .europa-container {
     display: flex;
-    justify-content: center; /* horizontal in die Mitte */
-    align-items: center;     /* vertikal in die Mitte */
+    justify-content: flex-end; 
+    align-items: flex-start;    
     height: 800px;
     width: 800px;
 }
 
 .europa-container img {
-   width: 700px;
+   width: 300px;
    height: auto;
 }
+
+*/

@@ -24,12 +24,14 @@ echo'</pre>';
 
 // Definiert eine Zuordnung von Koordinaten zu Stadtnamen
 $locationsMap = [
-    '46.94,7.44' => 'Bern',
-    '46.84,9.52' => 'Chur',
-    '47.36,8.559999' => 'Zürich',
+    '52.3676, 4.9041' => 'Amsterdam',
+    '46.9480, 7.4474' => 'Bern',
+    '52.5200, 13.4050' => 'Berlin',
+    '48.1486, 17.1077' => 'Bratislava',
+    '50.8534, 4.3517' => 'Brüssel',
+    '47.4995, 19.0402' => 'Budapest',
 ];
 
-// Funktion, um Fahrenheit in Celsius umzurechnen
 
 // Neue Funktion zur Bestimmung der Wetterbedingung
 
@@ -41,10 +43,10 @@ $transformedData = [];
 // Transformiert und fügt die notwendigen Informationen hinzu
 foreach ($data as $location) {
     // Bestimmt den Stadtnamen anhand von Breitengrad und Längengrad
-
-    // Wandelt die Temperatur in Celsius um und rundet sie
-
-    // Bestimmt die Wetterbedingung
+    $cityKey = $location['latitude'] . ',' . $location['longitude'];
+    $city = $locationsMap[$cityKey] ?? 'Unbekannt';
+    
+        // Bestimmt die Wetterbedingung
 
     // Konstruiert die neue Struktur mit allen angegebenen Feldern, einschließlich des neuen 'condition'-Feldes
 }
