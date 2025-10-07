@@ -1,22 +1,32 @@
 *{
     background-color: rgb(175, 175, 255);
-    margin: 0 0;
-    padding: 0 0;
-    box-sizing: border-box;
     font-size: 18px;
     letter-spacing: 0.1em;
     font-family: MuseoModerno, sans-serif;
+    margin: 0;
+    padding: 0;
 }
+
 
 @font-face {
     font-family:"MuseoModerno";
     src: url(MuseoModerno/static/MuseoModerno-Medium.ttf);
 }
 
-h1 {
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    height: 100vh;
+    padding: 20px;
+}
+
+
+.heading {
+    grid-column: 1 / 2; /* links oben */
+    grid-row: 1 / 2;
     font-size: 80px;
-    text-align: center;
-    margin-top: 20vh;
     text-shadow: 8px 8px 2px rgba(255,235,145,0.5);
     
 }
@@ -25,15 +35,31 @@ h1 {
 
 
 .europa-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 500px;
+   grid-column: 1 / 2; 
+    grid-row: 2 / 3;
+    display: grid;
+    align-items: end;
+    justify-items: start;
+    height: 100%;
+    
 }
 
 .europa-container img {
-    height: 500px;
-    width: 500px;
-    display: block;
+    width: 800px;
+    height: auto;
 }
+
+.info-box {
+    grid-column: 2 / 3; /* rechts unten */
+    grid-row: 2 / 3;
+    background-color: #b0f0c2;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.chart-area {
+    grid-column: 2 / 3; /* rechts oben */
+    grid-row: 1 / 2;
+}
+
 
