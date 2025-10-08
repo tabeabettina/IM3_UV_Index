@@ -1,5 +1,4 @@
 <?php
-
 /* ============================================================================
    HANDLUNGSANWEISUNG (extract.php)
    1) Lade Konfiguration/Constants (API-URL, Parameter, ggf. Zeitzone).
@@ -14,66 +13,34 @@
   10) Fehlerfälle: Exception/Fehlerobjekt nach oben reichen (kein HTML ausgeben).
    ============================================================================ */
 
-function fetchUVData()
-{
-    $url = "https://currentuvindex.com/api/v1/uvi?latitude=40.6943&longitude=-73.9249";
 
-    // Initialisiert eine cURL-Sitzung
-$ch = curl_init($url);
 
-    // Setzt Optionen
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    // Führt die cURL-Sitzung aus und erhält den Inhalt
-$response = curl_exec($ch);
-
-    // Schließt die cURL-Sitzung
-curl_close($ch);
-print_r($response);
-
-    // Dekodiert die JSON-Antwort und gibt Daten zurück
-return json_decode($response, true);
-}
-
-// Gibt die Daten zurück, wenn dieses Skript eingebunden ist
-return fetchUVData();
-
-//Array
-
-$cities = [
-    [
-        "city" => "Amsterdam",
-        "latitude" => 52.3676,
-        "longitude" => 4.9041
-    ],
-    [
-        "city" => "Bern",
-        "latitude" => 46.9480,
-        "longitude" => 7.4474
-    ],
-    [
-        "city" => "Berlin",
-        "latitude" => 52.5200,
-        "longitude" => 13.4050
-    ],
-    [
-        "city" => "Bratislava",
-        "latitude" => 48.1482,
-        "longitude" => 17.1067
-    ],
-    [
-        "city" => "Brussels",
-        "latitude" => 50.8503,
-        "longitude" => 4.3517
-    ],
-    [
-        "city" => "Budapest",
-        "latitude" => 47.4979,
-        "longitude" => 19.0402
-    ]
+$urls = [
+    'Amsterdam' => "https://currentuvindex.com/api/v1/uvi?latitude=52.3676&longitude=4.9041",
+    'Bern' => "https://currentuvindex.com/api/v1/uvi?latitude=46.9480&longitude=7.4474",
+    // hier kannst du beliebig viele weitere hinzufügen:
+    // 'Paris' => $url_Paris,
+    // 'Berlin' => $url_Berlin,
 ];
 
-foreach ($cities as $city) {
-    $data = fetchUVData($city['latitude'], $city['longitude']);
-    echo "City: " . $city['city'] . " - UV Index: " . $data['uv_index'] . "\n";
+function getCityData($url) {
+ 
+    $ch = curl_init($url);
+
+    // Optionen setzen
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Anfrage ausführen
+    $response = curl_exec($ch);
+    // echo $response;
+    // echo "<br><br>";
+
+    // Verbindung schließen
+    curl_close($ch);
+
+    return json_decode($response, true);
 }
+
+$amsterdam_data = getCityData($urls['Amsterdam']);
+$bern_data = getCityData($urls['Bern']);
+

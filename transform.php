@@ -16,41 +16,26 @@
    ============================================================================ */
 
 // Bindet das Skript extract.php für Rohdaten ein und speichere es in $data
-$data = include('extract.php');
+include('extract.php');
 
-echo'<pre>';
-print_r($data);
-echo'</pre>';
-
-// Definiert eine Zuordnung von Koordinaten zu Stadtnamen
-$locationsMap = [
-    '52.3676, 4.9041' => 'Amsterdam',
-    '46.9480, 7.4474' => 'Bern',
-    '52.5200, 13.4050' => 'Berlin',
-    '48.1486, 17.1077' => 'Bratislava',
-    '50.8534, 4.3517' => 'Brüssel',
-    '47.4995, 19.0402' => 'Budapest',
+$cities = [
+    "amsterdam" => $amsterdam_data['now']['uvi'],
+    "bern" => $bern_data['now']['uvi']
 ];
 
 
-// Neue Funktion zur Bestimmung der Wetterbedingung
+$transformedData[] = [];
 
-
-
-// Initialisiert ein Array, um die transformierten Daten zu speichern
-$transformedData = [];
-
-// Transformiert und fügt die notwendigen Informationen hinzu
-foreach ($data as $location) {
-    // Bestimmt den Stadtnamen anhand von Breitengrad und Längengrad
-    $cityKey = $location['latitude'] . ',' . $location['longitude'];
-    $city = $locationsMap[$cityKey] ?? 'Unbekannt';
-    
-        // Bestimmt die Wetterbedingung
-
-    // Konstruiert die neue Struktur mit allen angegebenen Feldern, einschließlich des neuen 'condition'-Feldes
+// Jetzt über alle Städte iterieren und ins Zielarray schreiben
+foreach ($cities as $city => $uvi) {
+    $transformedData[] = [
+        "city" => $city,
+        "uvindex" => $uvi
+    ];
 }
 
-// Kodiert die transformierten Daten in JSON
+// Optional: Ausgabe zur Kontrolle
+// print_r($transformedData);
 
-// Gibt die JSON-Daten zurück, anstatt sie auszugeben
+
+
