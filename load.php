@@ -12,10 +12,15 @@ try{
          if (empty($item)) {
              continue; // Überspringt leere Einträge
          }
+        // $stmt->execute([
+        //     $item['city'],
+        //     $item['uvindex']
+        // ]);
         $stmt->execute([
-            $item['city'],
-            $item['uvindex']
+        $item['city'],
+        $item['uvindex'] ?? 0
         ]);
+
     }
 
     echo "Daten erfolgreich eingefügt.";

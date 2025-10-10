@@ -15,34 +15,36 @@
   10) Fehlerfälle als Exception nach oben weiterreichen (kein HTML/echo).
    ============================================================================ */
 
-// Bindet das Skript extract.php für Rohdaten ein und speichere es in $data
+
+// extract.php einbinden (damit die Daten verfügbar sind)
 include('extract.php');
+
+// Array mit UV-Index für jede Stadt
 $cities = [
-    "amsterdam" => $amsterdam_data['now']['uvi'],
-    "bern" => $bern_data['now']['uvi'],
-    "dublin" => $dublin_data['now']['uvi'],
-    "kopenhagen" => $kopenhagen_data['now']['uvi'],
-    "lissabon" => $lissabon_data['now']['uvi'],
-    "madrid" => $madrid_data['now']['uvi'],
-    "prag" => $prag_data['now']['uvi'],
-    "rom" => $rom_data['now']['uvi']
+    'Amsterdam'   => $amsterdam_data['now']['uvi'] ?? null,
+    'Bern'        => $bern_data['now']['uvi'] ?? null,
+    'Dublin'      => $dublin_data['now']['uvi'] ?? null,
+    'Kopenhagen'  => $kopenhagen_data['now']['uvi'] ?? null,
+    'Lissabon'    => $lissabon_data['now']['uvi'] ?? null,
+    'Madrid'      => $madrid_data['now']['uvi'] ?? null,
+    'Prag'        => $prag_data['now']['uvi'] ?? null,
+    'Rom'         => $rom_data['now']['uvi'] ?? null,
 ];
 
+// Zielarray erstellen
+$transformedData = [];
 
-$transformedData[] = [];
-
-// Jetzt über alle Städte iterieren und ins Zielarray schreiben
 foreach ($cities as $city => $uvi) {
     $transformedData[] = [
-        "city" => $city,
-        "uvindex" => $uvi
+        'city'    => $city,
+        'uvindex' => $uvi
     ];
 }
 
-
-
-// Optional: Ausgabe zur Kontrolle
+// Ausgabe
+// echo "<pre>";
 // print_r($transformedData);
+// echo "</pre>";
 
 
 

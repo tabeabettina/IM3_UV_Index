@@ -20,7 +20,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 $city = isset($_GET['city']) ? $_GET['city'] : null;
 
-$sql ='SELECT uvindex FROM `IM3_UV` WHERE `city` = \'' . $city  . '\' ORDER BY `id` DESC LIMIT 10';
+$sql = 'SELECT uvindex FROM IM3_UV WHERE LOWER(city) = LOWER(:city) ORDER BY id DESC LIMIT 10';
 
 try {
     // Erstellt eine neue PDO-Instanz mit der Konfiguration aus config.php
@@ -28,7 +28,8 @@ try {
 
     $stmt = $pdo->prepare($sql);
 
-    $stmt->execute();
+    // $stmt->execute();
+    $stmt->execute(['city' => $city]);
 
     $rows = $stmt->fetchAll();
 
@@ -39,7 +40,6 @@ try {
 
     // print_r($uvvalues);
 
-    // print_r($results);
 
     echo json_encode($uvvalues);
 
