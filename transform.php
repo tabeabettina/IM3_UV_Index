@@ -17,10 +17,15 @@
 
 // Bindet das Skript extract.php für Rohdaten ein und speichere es in $data
 include('extract.php');
-
 $cities = [
     "amsterdam" => $amsterdam_data['now']['uvi'],
-    "bern" => $bern_data['now']['uvi']
+    "bern" => $bern_data['now']['uvi'],
+    "dublin" => $dublin_data['now']['uvi'],
+    "kopenhagen" => $kopenhagen_data['now']['uvi'],
+    "lissabon" => $lissabon_data['now']['uvi'],
+    "madrid" => $madrid_data['now']['uvi'],
+    "prag" => $prag_data['now']['uvi'],
+    "rom" => $rom_data['now']['uvi']
 ];
 
 
@@ -33,6 +38,8 @@ foreach ($cities as $city => $uvi) {
         "uvindex" => $uvi
     ];
 }
+
+
 
 // Optional: Ausgabe zur Kontrolle
 // print_r($transformedData);

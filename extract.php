@@ -18,9 +18,12 @@
 $urls = [
     'Amsterdam' => "https://currentuvindex.com/api/v1/uvi?latitude=52.3676&longitude=4.9041",
     'Bern' => "https://currentuvindex.com/api/v1/uvi?latitude=46.9480&longitude=7.4474",
-    // hier kannst du beliebig viele weitere hinzufügen:
-    // 'Paris' => $url_Paris,
-    // 'Berlin' => $url_Berlin,
+    'Dublin' => "https://currentuvindex.com/api/v1/uvi?latitude=53.331&longitude=-6.2489",
+    'Kopenhagen' => "https://currentuvindex.com/api/v1/uvi?latitude=55.4048&longitude=12.3524",
+    'Lissabon' => "https://currentuvindex.com/api/v1/uvi?latitude=38.4331&longitude=-9.0900",
+    'Madrid' => "https://currentuvindex.com/api/v1/uvi?latitude=40.4165&longitude=-3.7026",
+    'Prag' => "https://currentuvindex.com/api/v1/uvi?latitude=50.0880&longitude=-14.4208",
+    'Rom' => "https://currentuvindex.com/api/v1/uvi?latitude=41.9028&longitude=12.4964"
 ];
 
 function getCityData($url) {
@@ -32,8 +35,6 @@ function getCityData($url) {
 
     // Anfrage ausführen
     $response = curl_exec($ch);
-    // echo $response;
-    // echo "<br><br>";
 
     // Verbindung schließen
     curl_close($ch);
@@ -43,4 +44,10 @@ function getCityData($url) {
 
 $amsterdam_data = getCityData($urls['Amsterdam']);
 $bern_data = getCityData($urls['Bern']);
+$dublin_data = getCityData($urls['Dublin']);
+$kopenhagen_data = getCityData($urls['Kopenhagen']);
+$lissabon_data = getCityData($urls['Lissabon']);
+$ljubljana_data = getCityData($urls['Ljubljana']);
+$madrid_data = getCityData($urls['Madrid']);
+$prag_data = getCityData($urls['Prag']);
 
