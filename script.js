@@ -8,6 +8,8 @@
 //     romData
 // });
 
+
+
 uv_amsterdam = [];
 uv_bern = [];
 uv_dublin = [];
@@ -18,7 +20,7 @@ uv_prag = [];
 uv_rom = [];
 
 const urls = [
-    'https://im3-uv.ramisberger-tabea.ch/unload.php?city=amsterdam',
+    'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Amsterdam',
     'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Bern',
     'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Dublin',
     'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Kopenhagen',

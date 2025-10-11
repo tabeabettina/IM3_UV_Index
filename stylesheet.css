@@ -38,7 +38,7 @@
 
 /* Linke Seite: 60% / 40% der Höhe */
 .left-top {
-  flex: 0 0 40%;
+  flex: 0 0 35%;
   background-color: #a7c7ff;
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@
 }
 
 .left-bottom {
-  flex: 0 0 60%;
+  flex: 0 0 65%;
   background-color: #7ea7e0;
   display: flex;
   align-items: center;
@@ -55,7 +55,7 @@
 
 /* Rechte Seite: 20% / 50% / 30% der Höhe */
 .right-top {
-  flex: 0 0 10%;
+  flex: 0 0 14%;
   background-color: #ffe59d;
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@
 }
 
 .right-middle {
-  flex: 0 0 60%;
+  flex: 0 0 55%;
   background-color: #fff2cc;
   display: flex;
   align-items: center;
@@ -88,7 +88,7 @@
 }
 
 .europa-container img {
-  width: 30vw;     /* skaliert proportional zur Bildschirmbreite */
+  width: 35vw;     /* skaliert proportional zur Bildschirmbreite */
   height: auto;
   max-height: 100%;
   object-fit: contain;
@@ -108,13 +108,13 @@
 .title h1 {
     font-size: 130px;
     text-shadow: 20px 18px 20px rgba(255,235,145,1.2);
-    margin-top: 100px;
+    margin-top: 0px;
 }
 
 .title img{
   width: 300px;
   height: auto;
-  margin-top: 100px;
+  margin-top: 0px;
 }
 
 /* .subtitle {
@@ -152,7 +152,7 @@
   font-weight: bolder;
   text-shadow: 10px 15px 10px rgba(247, 179, 179, 1.2);
   grid-column: 1 / -1; /* Text über beide Spalten */
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 /* .location-button {
