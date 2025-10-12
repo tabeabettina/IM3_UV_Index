@@ -36,7 +36,27 @@
   flex-direction: column;  /* 3 Abschnitte untereinander */
 }
 
-/* Linke Seite: 60% / 40% der Höhe */
+
+
+
+
+
+/* Rechte Seite: 20% / 50% / 30% der Höhe */
+
+
+
+
+.right-bottom {
+  flex: 0 0 30%;
+  background-color: #c8e1d3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* left side top im Layout 35% */
+
 .left-top {
   flex: 0 0 35%;
   background-color: #a7c7ff;
@@ -45,34 +65,109 @@
   justify-content: center;
 }
 
+/* === Title / Subtitle === */
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* alles zentriert */
+    gap: 1rem; /* Abstand zwischen den Elementen */
+}
+
+.title h1 {
+    font-size: 130px;
+    text-shadow: 20px 18px 20px rgba(255,235,145,1.2);
+    margin-top: 0px;
+}
+
+.title img{
+  width: 300px;
+  height: auto;
+  margin-top: 0px;
+}
+
+
+.subtitle {
+  display: grid;
+  grid-template-columns: 1fr auto; /* Text nimmt Platz, Button rechts */
+  grid-template-rows: auto auto;   /* zwei Zeilen */
+  margin-left: 90px;
+}
+
+.subtitle h2 {
+  font-size: 60px;
+  font-weight: bolder;
+  text-shadow: 10px 15px 10px rgba(247, 179, 179, 1.2);
+  grid-column: 1 / -1; /* Text über beide Spalten */
+  margin-top: 20px;
+}
+
+
+.location-button {
+  grid-column: 2; /* rechte Seite */
+  grid-row: 2;    /* zweite Zeile */
+  height: 50px;
+  width: 220px;
+  border-radius: 10px;
+  background-color: white;
+  border: 5px solid rgb(145, 255, 186);
+  justify-self: end; /* ganz rechts */
+  margin-top: -60px;
+  margin-right: 80px;
+  z-index: 1;
+
+  /* ✨ Text mittig ausrichten */
+  display: flex;
+  justify-content: center; /* horizontal */
+  align-items: center;      /* vertikal */
+}
+
+
+.location-button p {
+  font-size: 22px;
+  background-color: transparent;
+  align-items: center;
+  text-align: left;
+  margin: 20px;
+  text-shadow: none;
+
+}
+
+.select{
+  position: relative;
+  left: 20px;
+  height: 50px;
+  width: 50px;
+  background-color: rgb(147, 201, 167);
+  border-radius: 10px;
+  border: 5px solid rgb(145, 255, 186);
+}
+
+.select p{
+  position: relative;
+  top: -10px;
+  left: -3px;
+  font-size: 30px;
+  background-color: transparent;
+  align-items: center;
+  text-align: center;
+  margin: 14px;
+  color: white;
+  font-weight: bold;
+  text-shadow: none;
+}
+
+.select:hover {
+  background-color: rgb(110, 176, 145);
+  cursor: pointer;
+}
+
+
+/* left side bottom im Layout 65% */
+
 .left-bottom {
   flex: 0 0 65%;
   background-color: #7ea7e0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Rechte Seite: 20% / 50% / 30% der Höhe */
-.right-top {
-  flex: 0 0 14%;
-  background-color: #ffe59d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.right-middle {
-  flex: 0 0 55%;
-  background-color: #fff2cc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.right-bottom {
-  flex: 0 0 30%;
-  background-color: #c8e1d3;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,108 +190,104 @@
   margin: 18px;
 }
 
+/* Punkte für auf der Karte */
 
-/* === Heading === */
 
-.title {
-    display: flex;
-    justify-content: center;
-    align-items: center; /* alles zentriert */
-    gap: 1rem; /* Abstand zwischen den Elementen */
-}
 
-.title h1 {
-    font-size: 130px;
-    text-shadow: 20px 18px 20px rgba(255,235,145,1.2);
-    margin-top: 0px;
-}
 
-.title img{
-  width: 300px;
-  height: auto;
-  margin-top: 0px;
-}
 
-/* .subtitle {
-    display: flex;
-    gap: 1rem; 
-}
 
-.subtitle p{
-    display: flex; 
-    font-size: 60px;
-    font-weight: bolder;
-    text-shadow: 10px 15px 10px rgba(247, 179, 179, 1.2);
-    margin-left: 90px;
-}
 
-.location-button {
-    height: 50px;
-    width: 150px;
-    stroke-width: 20px;
-    stroke:rgb(145 255 186);
-    border-radius: 10px;
-    background-color: white;
-   align-items: flex-end;
-} */
 
-.subtitle {
-  display: grid;
-  grid-template-columns: 1fr auto; /* Text nimmt Platz, Button rechts */
-  grid-template-rows: auto auto;   /* zwei Zeilen */
-  margin-left: 90px;
-}
 
-.subtitle h2 {
-  font-size: 60px;
-  font-weight: bolder;
-  text-shadow: 10px 15px 10px rgba(247, 179, 179, 1.2);
-  grid-column: 1 / -1; /* Text über beide Spalten */
-  margin-top: 20px;
-}
 
-/* .location-button {
-  grid-column: 2; 
-  grid-row: 2;   
-  height: 50px;
-  width: 220px;
-  border-radius: 10px;
-  background-color: white;
-  border: 2px solid rgb(145, 255, 186);
-  justify-self: end; 
-  margin-top: -60px;
-  margin-right: 80px;
-  z-index: 1;
-} */
+/* right side top im Layout 15% */
 
-.location-button {
-  grid-column: 2; /* rechte Seite */
-  grid-row: 2;    /* zweite Zeile */
-  height: 50px;
-  width: 220px;
-  border-radius: 10px;
-  background-color: white;
-  border: 2px solid rgb(145, 255, 186);
-  justify-self: end; /* ganz rechts */
-  margin-top: -60px;
-  margin-right: 80px;
-  z-index: 1;
-
-  /* ✨ Text mittig ausrichten */
+.right-top {
+  flex: 0 0 15%;
+  background-color: #ffe59d;
   display: flex;
-  justify-content: center; /* horizontal */
-  align-items: center;      /* vertikal */
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-right: 90px;
 }
 
+/* Buttons */
 
-.location-button p {
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 100px;   /* füllt die rechte untere Fläche komplett */
+  width: 330px;
+  gap: 2rem;
+}
+
+.karte-button{
+  height: 50px;
+  width: 150px;
+  border-radius: 10px;
+  background-color: rgb(255, 146, 138);
+  border: 5px white solid;
+}
+
+.karte-button p{
   font-size: 22px;
   background-color: transparent;
-  align-items: center;
-  text-align: left;
-  margin: 20px;
-
+  text-shadow: none;
+  font-weight: bold;
 }
+
+/* .karte-button:hover {
+  background-color: rgb(255, 100, 90);
+  cursor: pointer;
+}
+
+.karte-button:active {
+  background-color: rgb(200, 50, 40);
+  cursor: pointer;
+} */
+
+
+.analyse-button{
+  height: 50px;
+  width: 150px;
+  border-radius: 10px;
+  background-color: rgb(189, 189, 189);
+  border: 5px white solid;
+}
+
+.analyse-button p{
+  font-size: 22px;
+  color: rgb(105, 105, 105);
+  background-color: transparent;
+  text-shadow: none;
+  font-weight: bold;
+}
+
+
+/* right middle im Layout 55%  */
+
+.right-middle {
+  flex: 0 0 55%;
+  background-color: #fff2cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-container{
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+#myChart {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 
 
 

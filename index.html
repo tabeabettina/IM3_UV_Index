@@ -12,65 +12,67 @@
 
 
   <div class="layout">
+    
+
+    <!-- Title, Subtitle - Left Top  -->
+
     <div class="left">
-
-    <!-- Heading  -->
-
       <div class="left-top">
         <div class="title">
           <img src="IMG/Logo.png" alt="Eurotan Logo">
           <h1>Eurotan</h1>
         </div>
-
-        <div class ="subtitle">
-          <h2>Wo hets vöu Sonne gha? <br> Velecht in?</p>
-          <div class="location-button">
-            <p>Lissabon</p>
+      
+      <div class ="subtitle">
+        <h2>Wo hets vöu Sonne gha? <br> Velecht in?</h2>
+        <div class="location-button">
+          <p>Lissabon</p>
+          <div class="select">
+            <p>▼</p>
           </div>
         </div>
-      </div> 
-
-
-
-
-
-
-
-
-    <!-- <div class="left-top">
-    <div class="heading">
-        <div class="logo-container">
-            <img src="IMG/Logo.png" alt="Eurotan Logo">
-        </div>
-        <h1>Eurotan</h1>
-        <p>Wo hets vöu Sonne gha? <br> Velecht in?</p>
-    </div>
-    <div class="location-button"></div>
-  </div>  -->
-
-  <!-- Logo -->
-  <!-- <div class="logo">
-    <div class="logo-container">
-        <img src="IMG/Logo.png" alt="Eurotan Logo">
-  </div> -->
-
-    <!-- Europa Container -->
-    <div class="left-bottom">
-      <div class="europa-container">
-        <img src="/IMG/Europa_klein.png" alt="Europa">
       </div>
-    </div>
-  </div>
+    </div> 
 
-  <div class="right">
-    <div class="right-top">Rechts - 20%</div>
-    <div class="right-middle">Rechts - 50%</div>
+    <!-- Europa Container - Left Bottom -->
+      <div class="left-bottom">
+        <div class="europa-container">
+        <img src="/IMG/Europa_klein.png" alt="Europa">
+       </div>
+     </div>
+    </div>
+
+    <div class="right">
+      <div class="right-top">
+        <div class ="button-container">
+          <button class="karte-button">
+            <p>Karte</p>
+          </button>
+        
+          <button class="analyse-button">
+           <p>Analyse</p>
+          </button>
+        </div>
+      </div>
+
+      <div class="right-middle">
+        <div class="chart-container">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+
     <div class="right-bottom">Rechts - 30%</div>
   </div>
 </div> 
 
+
+    <!-- Buttons right -->
+     
+
+
+
+
  <!-- Chart Verlinkung -->
-<canvas id="myChart" width="400" height="200"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="script.js"></script>
 </body>
