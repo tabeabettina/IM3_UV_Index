@@ -95,5 +95,109 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
         console.error('Error:', error);
     });
 
-    // Chart einfügen (Daten usw.)//
+
+
+    
+    // Marker für jede Stadt hinzufügen
+// Positionen der Städte auf der Karte (geschätzt in %)
+const cityPositions = {
+  "Amsterdam":  { top: 23, left: 46 },
+  "Bern":       { top: 42, left: 50 },
+  "Dublin":     { top: 26, left: 35 },
+  "Kopenhagen": { top: 18, left: 55 },
+  "Lissabon":   { top: 65, left: 30 },
+  "Madrid":     { top: 55, left: 33 },
+  "Prag":       { top: 32, left: 56 },
+  "Rom":        { top: 58, left: 58 }
+};
+
+const mapContainer = document.querySelector(".europa-container");
+
+fetch("https://im3-uv.ramisberger-tabea.ch/unload.php?all=true")
+  .then(res => res.json())
+  .then(data => {
+    data.forEach(cityData => {
+      const { city, uvindex } = cityData;
+
+      // Falls Stadt keine Position hat, überspringen
+      if (!cityPositions[city]) return;
+
+      const pos = cityPositions[city];
+      const marker = document.createElement("div");
+      marker.classList.add("marker");
+      marker.dataset.city = city;
+
+      // Positionierung in Prozent (passt sich bei Skalierung an)
+      marker.style.top = `${pos.top}%`;
+      marker.style.left = `${pos.left}%`;
+
+      // Farbe abhängig vom UV-Index
+      let color;
+      if (uvindex < 3) color = "rgb(145, 255, 186)";
+      else if (uvindex < 6) color = "rgb(255, 255, 120)";
+      else color = "rgb(255, 120, 120)";
+      marker.style.backgroundColor = color;
+
+      // Hover-Effekt mit Info
+      marker.addEventListener("mouseenter", () => {
+        marker.style.boxShadow = `0 0 15px ${color}`;
+      });
+      marker.addEventListener("mouseleave", () => {
+        marker.style.boxShadow = "none";
+      });
+
+      mapContainer.appendChild(marker);
+    });
+  })
+  .catch(err => console.error("Fehler beim Laden der Daten:", err));
+
+
+
+
+
+
+
+
+
+
+
+//     const cities = [
+//   { name: "Amsterdam", top: 20, left: 45, uv: 2.5 },
+//   { name: "Bern", top: 35, left: 50, uv: 3.8 },
+//   { name: "Dublin", top: 25, left: 35, uv: 1.9 },
+//   { name: "Kopenhagen", top: 15, left: 55, uv: 2.2 },
+//   { name: "Lissabon", top: 65, left: 30, uv: 5.7 },
+//   { name: "Madrid", top: 55, left: 33, uv: 6.3 },
+//   { name: "Prag", top: 30, left: 55, uv: 3.1 },
+//   { name: "Rom", top: 55, left: 58, uv: 6.9 },
+// ];
+
+// const mapContainer = document.querySelector(".europa-container");
+
+// cities.forEach(city => {
+//   const marker = document.createElement("div");
+//   marker.classList.add("marker");
+//   marker.dataset.city = city.name;
+
+//   // Positionierung in Prozent
+//   marker.style.top = `${city.top}%`;
+//   marker.style.left = `${city.left}%`;
+
+//   // Farbe abhängig vom UV-Index
+//   let color;
+//   if (city.uv < 3) color = "rgb(145, 255, 186)";
+//   else if (city.uv < 6) color = "rgb(255, 255, 120)";
+//   else color = "rgb(255, 120, 120)";
+//   marker.style.backgroundColor = color;
+
+//   // Hover-Effekt (aufleuchten)
+//   marker.addEventListener("mouseenter", () => {
+//     marker.style.boxShadow = `0 0 15px ${color}`;
+//   });
+//   marker.addEventListener("mouseleave", () => {
+//     marker.style.boxShadow = "none";
+//   });
+
+//   mapContainer.appendChild(marker);
+// });
 

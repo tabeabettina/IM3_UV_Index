@@ -175,6 +175,7 @@
 
 /* === Europa-Container === */
 .europa-container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -188,9 +189,53 @@
   max-height: 100%;
   object-fit: contain;
   margin: 18px;
+  display: block;
 }
 
-/* Punkte für auf der Karte */
+/* .amsterdam-dot{
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  background-color: blue;
+  right: 475px;
+  bottom: 150px;
+} */
+
+.marker {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.marker:hover {
+  transform: translate(-50%, -50%) scale(1.4);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.marker::after {
+  content: attr(data-city);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: #333;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.marker:hover::after {
+  opacity: 1;
+}
 
 
 
