@@ -48,11 +48,11 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
         new Chart(myChart, {
             type: "line", // "line", "pie", "doughnut", "polarArea", "radar"
             data: {
-                labels: ["heute", "gestern", "vorgestern", "vor 3 Tagen", "vor 4 Tagen", "vor 5 Tagen","vor 6 Tagen"],
+                labels: ["vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen", "vorgestern", "gestern","heute"],
                 datasets:[
                     {
                         data: uv_amsterdam,
-                        label: "uv-intensität amsterdam"
+                        label: "Amsterdam"
                     } ,         
                     {
                         data: uv_bern,
@@ -201,3 +201,31 @@ fetch("https://im3-uv.ramisberger-tabea.ch/unload.php?all=true")
 //   mapContainer.appendChild(marker);
 // });
 
+
+
+const locationButton = document.getElementById("locationButton");
+const dropdownMenu = document.getElementById("dropdownMenu");
+
+locationButton.addEventListener("click", () => {
+  dropdownMenu.classList.toggle("hidden");
+});
+
+// Klick auf Stadtname im Dropdown
+dropdownMenu.addEventListener("click", (event) => {
+  if (event.target.tagName === "LI") {
+    const city = event.target.dataset.city;
+    locationButton.textContent = city + " ▼";
+    dropdownMenu.classList.add("hidden");
+
+    console.log("Ausgewählte Stadt:", city);
+    // Hier später: Funktion aufrufen, um das Diagramm zu aktualisieren
+    // updateChart(city);
+  }
+});
+
+// Schließt das Menü, wenn außerhalb geklickt wird
+document.addEventListener("click", (event) => {
+  if (!locationButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+    dropdownMenu.classList.add("hidden");
+  }
+});
