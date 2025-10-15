@@ -262,8 +262,8 @@
 .button-container {
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
-  height: 100px;   /* füllt die rechte untere Fläche komplett */
+  align-items: flex-start;
+  height: 80px;   /* füllt die rechte untere Fläche komplett */
   width: 330px;
   gap: 2rem;
 }
@@ -323,52 +323,19 @@
 
 .chart-container{
   display: flex;
-  height: 100%;
-  width: 100%;
+  width: 90%;
+  height: auto;
 }
 
 #myChart {
-  width: 100%;
-  height: auto;
   object-fit: contain;
+  background-color: white;
+  font-size: 18px;
 }
 
 
 
 
-/* .heading p {
-    font-size: 60px;
-    font-weight: bolder;
-    text-shadow: 10px 15px 10px rgba(247, 179, 179, 1.2);
-    margin-top: 10px;
-}
-
-.location-button {
-    height: 80px;
-    width: 300px;
-    stroke-width: 20px;
-    stroke:rgb(145 255 186);
-    border-radius: 20px;
-    background-color: white;
-}
-.logo-container {
-    display: flex;
-    margin-right: 630px;
-    justify-content: center;
-    width: 290px; /* gewünschte Größe */
-    /* height: auto;
-}
-
-.logo-container img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-} */ 
-
-/* === Logo === */
-/* .logo{
-  display: flex;
-} */
 
 
 
