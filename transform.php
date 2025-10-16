@@ -46,5 +46,3 @@ foreach ($cities as $city => $uvi) {
 // print_r($transformedData);
 // echo "</pre>";
 
-
-

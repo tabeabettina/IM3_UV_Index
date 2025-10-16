@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <title>Eurotan</title>
 </head>
+
 <body>
 
   <div class="layout">
@@ -21,7 +23,7 @@
           <h2>Wo hets vöu Sonne gha? <br> Velecht in?</h2>
 
           <div class="location-dropdown">
-            <button id="locationButton">Lissabon ▼</button>
+            <button id="locationButton">Amsterdam ▼</button>
             <ul id="dropdownMenu" class="hidden">
               <li data-city="Amsterdam">Amsterdam</li>
               <li data-city="Bern">Bern</li>
@@ -31,6 +33,7 @@
               <li data-city="Madrid">Madrid</li>
               <li data-city="Prag">Prag</li>
               <li data-city="Rom">Rom</li>
+              <li data-city="Vergleichen">Vergleichen</li>
             </ul>
           </div>
         </div>
@@ -47,8 +50,12 @@
     <div class="right">
       <div class="right-top">
         <div class="button-container">
-          <button class="karte-button"><p>Karte</p></button>
-          <button class="analyse-button"><p>Analyse</p></button>
+          <button class="karte-button">
+            <p>Karte</p>
+          </button>
+          <button class="analyse-button">
+            <p>Analyse</p>
+          </button>
         </div>
       </div>
 
@@ -75,4 +82,5 @@
   <script src="script.js"></script>
 
 </body>
+
 </html>

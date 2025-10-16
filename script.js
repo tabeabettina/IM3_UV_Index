@@ -1,146 +1,112 @@
-// console.log({
-//     bernData,
-//     dublinData,
-//     kopenhagenData,
-//     lissabonData,
-//     madridData,
-//     pragData,
-//     romData
-// });
+// -------------------------------
+// 🌤️ UV-Index Visualisierung
+// -------------------------------
 
-
-
-uv_amsterdam = [];
-uv_bern = [];
-uv_dublin = [];
-uv_kopenhagen = [];
-uv_lissabon = [];
-uv_madrid = [];
-uv_prag = [];
-uv_rom = [];
+let uv_amsterdam = [];
+let uv_bern = [];
+let uv_dublin = [];
+let uv_kopenhagen = [];
+let uv_lissabon = [];
+let uv_madrid = [];
+let uv_prag = [];
+let uv_rom = [];
 
 const urls = [
-    'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Amsterdam',
-    'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Bern',
-    'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Dublin',
-    'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Kopenhagen',
-    'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Lissabon',
-    'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Madrid',
-    'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Prag',
-    'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Rom'
+  'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Amsterdam',
+  'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Bern',
+  'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Dublin',
+  'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Kopenhagen',
+  'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Lissabon',
+  'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Madrid',
+  'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Prag',
+  'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Rom'
 ];
 
-Promise.all(urls.map(url => fetch(url).then(res => res.json())))
-    .then(([amsterdamData, bernData, dublinData, kopenhagenData, lissabonData, madridData, pragData, romData]) => {
-        uv_amsterdam = amsterdamData;
-        uv_bern = bernData;
-        uv_dublin = dublinData;
-        uv_kopenhagen = kopenhagenData;
-        uv_lissabon = lissabonData;
-        uv_madrid = madridData;
-        uv_prag = pragData;
-        uv_rom = romData;
+let chartInstance;
 
-      
-
-        let myChart = document.querySelector('#myChart').getContext("2d");
-
-        new Chart(myChart, {
-            type: "line", // "line", "pie", "doughnut", "polarArea", "radar"
-            data: {
-                labels: ["vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen", "vorgestern", "gestern","heute"],
-                datasets:[
-                    {
-                        data: uv_amsterdam,
-                        label: "Amsterdam"
-                    } ,         
-                    {
-                        data: uv_bern,
-                        label: "uv-intensität bern"
-                    } ,      
-                    {
-                        data: uv_dublin,
-                        label: "uv-intensität dublin"
-                    } ,         
-                    {
-                        data: uv_kopenhagen,
-                        label: "uv-intensität kopenhagen"
-                    } ,         
-                    {
-                        data: uv_lissabon,
-                        label: "uv-intensität lissabon"
-                    } ,         
-                    {
-                        data: uv_madrid,
-                        label: "uv-intensität madrid"
-                    } ,         
-                    {
-                        data: uv_prag,
-                        label: "uv-intensität prag"
-                    } ,         
-                    {
-                        data: uv_rom,
-                        label: "uv-intensität rom"
-                    }      
-                ]
-            }
-        });
-
-
-
-
-
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-
-
-
-    
-    // Marker für jede Stadt hinzufügen
-// Positionen der Städte auf der Karte (geschätzt in %)
-const cityPositions = {
-  "Amsterdam":  { top: 23, left: 46 },
-  "Bern":       { top: 42, left: 50 },
-  "Dublin":     { top: 26, left: 35 },
-  "Kopenhagen": { top: 18, left: 55 },
-  "Lissabon":   { top: 65, left: 30 },
-  "Madrid":     { top: 55, left: 33 },
-  "Prag":       { top: 32, left: 56 },
-  "Rom":        { top: 58, left: 58 }
+// -------------------------------
+// 🎨 Feste Farben für Diagramm-Linien
+// -------------------------------
+const cityColors = {
+  Amsterdam: "#E74C3C", // Rot
+  Bern: "#27AE60",      // Grün
+  Dublin: "#2980B9",    // Blau
+  Kopenhagen: "#8E44AD",// Lila
+  Lissabon: "#F39C12",  // Orange
+  Madrid: "#16A085",    // Türkis
+  Prag: "#D35400",      // Dunkelorange
+  Rom: "#2C3E50"        // Dunkelblau
 };
 
-const mapContainer = document.querySelector(".europa-container");
+// -------------------------------
+// 📊 Daten laden & Chart erstellen
+// -------------------------------
+Promise.all(urls.map(url => fetch(url).then(res => res.json())))
+  .then(([amsterdamData, bernData, dublinData, kopenhagenData, lissabonData, madridData, pragData, romData]) => {
+    uv_amsterdam = amsterdamData;
+    uv_bern = bernData;
+    uv_dublin = dublinData;
+    uv_kopenhagen = kopenhagenData;
+    uv_lissabon = lissabonData;
+    uv_madrid = madridData;
+    uv_prag = pragData;
+    uv_rom = romData;
 
-fetch("https://im3-uv.ramisberger-tabea.ch/unload.php?all=true")
-  .then(res => res.json())
-  .then(data => {
-    data.forEach(cityData => {
-      const { city, uvindex } = cityData;
+    const cityData = {
+      Amsterdam: uv_amsterdam,
+      Bern: uv_bern,
+      Dublin: uv_dublin,
+      Kopenhagen: uv_kopenhagen,
+      Lissabon: uv_lissabon,
+      Madrid: uv_madrid,
+      Prag: uv_prag,
+      Rom: uv_rom
+    };
 
-      // Falls Stadt keine Position hat, überspringen
-      if (!cityPositions[city]) return;
+    const ctx = document.querySelector('#myChart').getContext("2d");
+    chartInstance = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: ["vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen", "vorgestern", "gestern", "heute"],
+        datasets: []
+      }
+    });
 
-      const pos = cityPositions[city];
+    // -------------------------------
+    // 📍 Karte mit Städten
+    // -------------------------------
+    const cities = [
+      { name: "Amsterdam", top: 35, left: 51, uv: uv_amsterdam.at(-1) },
+      { name: "Bern", top: 54, left: 55, uv: uv_bern.at(-1) },
+      { name: "Dublin", top: 28, left: 26, uv: uv_dublin.at(-1) },
+      { name: "Kopenhagen", top: 25, left: 65, uv: uv_kopenhagen.at(-1) },
+      { name: "Lissabon", top: 75, left: 10, uv: uv_lissabon.at(-1) },
+      { name: "Madrid", top: 72, left: 29, uv: uv_madrid.at(-1) },
+      { name: "Prag", top: 43, left: 70, uv: uv_prag.at(-1) },
+      { name: "Rom", top: 68.5, left: 65, uv: uv_rom.at(-1) },
+    ];
+
+    const mapContainer = document.querySelector(".europa-container");
+
+    cities.forEach(city => {
       const marker = document.createElement("div");
       marker.classList.add("marker");
-      marker.dataset.city = city;
+      marker.dataset.city = city.name;
 
-      // Positionierung in Prozent (passt sich bei Skalierung an)
-      marker.style.top = `${pos.top}%`;
-      marker.style.left = `${pos.left}%`;
+      marker.style.top = `${city.top}%`;
+      marker.style.left = `${city.left}%`;
 
-      // Farbe abhängig vom UV-Index
+      // 🔥 Farbe abhängig vom UV-Index (interaktiv, wie bisher)
       let color;
-      if (uvindex < 3) color = "rgb(145, 255, 186)";
-      else if (uvindex < 6) color = "rgb(255, 255, 120)";
-      else color = "rgb(255, 120, 120)";
+      if (city.uv < 2) color = "rgb(145, 255, 186)";      // grün
+      else if (city.uv < 6) color = "rgb(255, 255, 120)"; // gelb
+      else color = "rgb(255, 120, 120)";                  // rot
+
       marker.style.backgroundColor = color;
 
-      // Hover-Effekt mit Info
+      // Hover-Effekt
       marker.addEventListener("mouseenter", () => {
-        marker.style.boxShadow = `0 0 15px ${color}`;
+        marker.style.boxShadow = `0 0 20px ${color}`;
       });
       marker.addEventListener("mouseleave", () => {
         marker.style.boxShadow = "none";
@@ -148,8 +114,95 @@ fetch("https://im3-uv.ramisberger-tabea.ch/unload.php?all=true")
 
       mapContainer.appendChild(marker);
     });
+
+    // -------------------------------
+    // 📋 Dropdown-Funktionalität
+    // -------------------------------
+    const locationButton = document.getElementById("locationButton");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    locationButton.addEventListener("click", () => {
+      dropdownMenu.classList.toggle("hidden");
+    });
+
+    dropdownMenu.addEventListener("click", (event) => {
+      if (event.target.tagName === "LI") {
+        const city = event.target.dataset.city;
+        locationButton.textContent = city + " ▼";
+        dropdownMenu.classList.add("hidden");
+
+        console.log("Ausgewählte Stadt:", city);
+        updateChart(city);
+      }
+    });
+
+    // Schließt Dropdown bei Klick außerhalb
+    document.addEventListener("click", (event) => {
+      if (!locationButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.add("hidden");
+      }
+    });
+
+    // -------------------------------
+    // 📈 Chart-Aktualisierung
+    // -------------------------------
+    function updateChart(city) {
+      if (city === "Vergleichen") {
+        // Alle Städte gleichzeitig anzeigen
+        const datasets = Object.keys(cityData).map(cityName => ({
+          label: `UV-Index ${cityName}`,
+          data: cityData[cityName],
+          borderWidth: 2,
+          borderColor: cityColors[cityName],
+          backgroundColor: "transparent",
+          tension: 0.3
+        }));
+
+        chartInstance.data.datasets = datasets;
+        chartInstance.update();
+
+        // Alle Marker sichtbar machen
+        document.querySelectorAll(".marker").forEach(marker => {
+          marker.style.display = "block";
+        });
+
+        return;
+      }
+
+      // Nur eine Stadt anzeigen
+      const uvValues = cityData[city];
+      if (!uvValues) {
+        console.error("Keine Daten für Stadt:", city);
+        return;
+      }
+
+      chartInstance.data.datasets = [
+        {
+          label: `UV-Index ${city}`,
+          data: uvValues,
+          borderWidth: 2,
+          borderColor: cityColors[city],
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          tension: 0.3,
+          fill: true
+        }
+      ];
+
+      chartInstance.update();
+
+      // Nur Marker der gewählten Stadt anzeigen
+      const markers = document.querySelectorAll(".marker");
+      markers.forEach(marker => {
+        marker.style.display = (marker.dataset.city === city) ? "block" : "none";
+      });
+    }
+
+    // Standardmäßig Bern anzeigen
+    updateChart("Bern");
   })
-  .catch(err => console.error("Fehler beim Laden der Daten:", err));
+  .catch(error => {
+    console.error('Error:', error);
+  });
 
 
 
@@ -158,74 +211,373 @@ fetch("https://im3-uv.ramisberger-tabea.ch/unload.php?all=true")
 
 
 
+// uv_amsterdam = [];
+// uv_bern = [];
+// uv_dublin = [];
+// uv_kopenhagen = [];
+// uv_lissabon = [];
+// uv_madrid = [];
+// uv_prag = [];
+// uv_rom = [];
 
-
-
-//     const cities = [
-//   { name: "Amsterdam", top: 20, left: 45, uv: 2.5 },
-//   { name: "Bern", top: 35, left: 50, uv: 3.8 },
-//   { name: "Dublin", top: 25, left: 35, uv: 1.9 },
-//   { name: "Kopenhagen", top: 15, left: 55, uv: 2.2 },
-//   { name: "Lissabon", top: 65, left: 30, uv: 5.7 },
-//   { name: "Madrid", top: 55, left: 33, uv: 6.3 },
-//   { name: "Prag", top: 30, left: 55, uv: 3.1 },
-//   { name: "Rom", top: 55, left: 58, uv: 6.9 },
+// const urls = [
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Amsterdam',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Bern',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Dublin',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Kopenhagen',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Lissabon',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Madrid',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Prag',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Rom'
 // ];
 
-// const mapContainer = document.querySelector(".europa-container");
+// let chartInstance;
 
-// cities.forEach(city => {
-//   const marker = document.createElement("div");
-//   marker.classList.add("marker");
-//   marker.dataset.city = city.name;
+// Promise.all(urls.map(url => fetch(url).then(res => res.json())))
+//   .then(([amsterdamData, bernData, dublinData, kopenhagenData, lissabonData, madridData, pragData, romData]) => {
+//     uv_amsterdam = amsterdamData;
+//     uv_bern = bernData;
+//     uv_dublin = dublinData;
+//     uv_kopenhagen = kopenhagenData;
+//     uv_lissabon = lissabonData;
+//     uv_madrid = madridData;
+//     uv_prag = pragData;
+//     uv_rom = romData;
 
-//   // Positionierung in Prozent
-//   marker.style.top = `${city.top}%`;
-//   marker.style.left = `${city.left}%`;
+//     const ctx = document.querySelector('#myChart').getContext("2d");
+//     chartInstance = new Chart(ctx, {
+//       type: "line",
+//       data: {
+//         labels: ["vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen", "vorgestern", "gestern", "heute"],
+//         datasets: []
+//       }
+//     });
 
-//   // Farbe abhängig vom UV-Index
-//   let color;
-//   if (city.uv < 3) color = "rgb(145, 255, 186)";
-//   else if (city.uv < 6) color = "rgb(255, 255, 120)";
-//   else color = "rgb(255, 120, 120)";
-//   marker.style.backgroundColor = color;
+//     // Dropdown-Menü Funktionalität
+//     const locationButton = document.getElementById("locationButton");
+//     const dropdownMenu = document.getElementById("dropdownMenu");
 
-//   // Hover-Effekt (aufleuchten)
-//   marker.addEventListener("mouseenter", () => {
-//     marker.style.boxShadow = `0 0 15px ${color}`;
+//     locationButton.addEventListener("click", () => {
+//       dropdownMenu.classList.toggle("hidden");
+//     });
+
+//     const cityData = {
+//       Amsterdam: uv_amsterdam,
+//       Bern: uv_bern,
+//       Dublin: uv_dublin,
+//       Kopenhagen: uv_kopenhagen,
+//       Lissabon: uv_lissabon,
+//       Madrid: uv_madrid,
+//       Prag: uv_prag,
+//       Rom: uv_rom
+//     };
+
+//     // Klick auf Stadtname im Dropdown
+//     dropdownMenu.addEventListener("click", (event) => {
+//       if (event.target.tagName === "LI") {
+//         const city = event.target.dataset.city;
+//         locationButton.textContent = city + " ▼";
+//         dropdownMenu.classList.add("hidden");
+
+//         console.log("Ausgewählte Stadt:", city);
+
+//         updateChart(city);
+//       }
+//     });
+
+//     // Schließt das Menü, wenn außerhalb geklickt wird
+//     document.addEventListener("click", (event) => {
+//       if (!locationButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+//         dropdownMenu.classList.add("hidden");
+//       }
+//     });
+
+//     // 🎨 Zufallsfarbe für jede Linie (bei "Vergleichen")
+//     function randomColor() {
+//       const r = Math.floor(Math.random() * 255);
+//       const g = Math.floor(Math.random() * 255);
+//       const b = Math.floor(Math.random() * 255);
+//       return `rgba(${r}, ${g}, ${b}, 1)`;
+//     }
+
+//     // 📊 Chart-Aktualisierung
+//     function updateChart(city) {
+//       if (city === "Vergleichen") {
+//         // Alle Städte gleichzeitig anzeigen
+//         const datasets = Object.keys(cityData).map(cityName => ({
+//           label: `UV-Index ${cityName}`,
+//           data: cityData[cityName],
+//           borderWidth: 2,
+//           borderColor: randomColor(),
+//           backgroundColor: "transparent",
+//           tension: 0.3
+//         }));
+
+//         chartInstance.data.datasets = datasets;
+//         chartInstance.update();
+
+//         // Alle Marker sichtbar machen
+//         document.querySelectorAll(".marker").forEach(marker => {
+//           marker.style.display = "block";
+//         });
+
+//         return; // Abbrechen, da Vergleich fertig
+//       }
+
+//       // Eine einzelne Stadt anzeigen
+//       const uvValues = cityData[city];
+
+//       if (!uvValues) {
+//         console.error("Keine Daten für Stadt:", city);
+//         return;
+//       }
+
+//       chartInstance.data.datasets = [
+//         {
+//           label: `UV-Index ${city}`,
+//           data: uvValues,
+//           borderWidth: 2,
+//           borderColor: "rgba(75, 192, 192, 1)",
+//           backgroundColor: "rgba(75, 192, 192, 0.2)",
+//           tension: 0.3,
+//           fill: true
+//         }
+//       ];
+
+//       chartInstance.update();
+
+//       // Nur Marker der gewählten Stadt anzeigen
+//       const markers = document.querySelectorAll(".marker");
+//       markers.forEach(marker => {
+//         marker.style.display = (marker.dataset.city === city) ? "block" : "none";
+//       });
+//     }
+
+//     // 🗺️ Marker für die Karte
+//     const cities = [
+//       { name: "Amsterdam", top: 35, left: 51, uv: uv_amsterdam[uv_amsterdam.length - 1] },
+//       { name: "Bern", top: 54, left: 55, uv: uv_bern[uv_bern.length - 1] },
+//       { name: "Dublin", top: 28, left: 26, uv: uv_dublin[uv_dublin.length - 1] },
+//       { name: "Kopenhagen", top: 25, left: 65, uv: uv_kopenhagen[uv_kopenhagen.length - 1] },
+//       { name: "Lissabon", top: 75, left: 10, uv: uv_lissabon[uv_lissabon.length - 1] },
+//       { name: "Madrid", top: 72, left: 29, uv: uv_madrid[uv_madrid.length - 1] },
+//       { name: "Prag", top: 43, left: 70, uv: uv_prag[uv_prag.length - 1] },
+//       { name: "Rom", top: 68.5, left: 65, uv: uv_rom[uv_rom.length - 1] },
+//     ];
+
+//     const mapContainer = document.querySelector(".europa-container");
+
+//     cities.forEach(city => {
+//       const marker = document.createElement("div");
+//       marker.classList.add("marker");
+//       marker.dataset.city = city.name;
+
+//       marker.style.top = `${city.top}%`;
+//       marker.style.left = `${city.left}%`;
+
+//       let color;
+//       if (city.uv < 2) color = "rgb(145, 255, 186)";
+//       else if (city.uv < 6) color = "rgb(255, 255, 120)";
+//       else color = "rgb(255, 120, 120)";
+//       marker.style.backgroundColor = color;
+
+//       marker.addEventListener("mouseenter", () => {
+//         marker.style.boxShadow = `0 0 20px ${color}`;
+//       });
+//       marker.addEventListener("mouseleave", () => {
+//         marker.style.boxShadow = "none";
+//       });
+
+//       mapContainer.appendChild(marker);
+//     });
+
+//     // 🔹 Standardanzeige beim Laden
+//     updateChart("Bern");
+
+//   })
+//   .catch(error => {
+//     console.error('Error:', error);
 //   });
-//   marker.addEventListener("mouseleave", () => {
-//     marker.style.boxShadow = "none";
+
+
+
+
+
+
+
+
+
+
+// uv_amsterdam = [];
+// uv_bern = [];
+// uv_dublin = [];
+// uv_kopenhagen = [];
+// uv_lissabon = [];
+// uv_madrid = [];
+// uv_prag = [];
+// uv_rom = [];
+
+// const urls = [
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Amsterdam',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Bern',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Dublin',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Kopenhagen',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Lissabon',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Madrid',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Prag',
+//   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Rom'
+// ];
+
+// let myChart;
+// let chartInstance;
+
+// Promise.all(urls.map(url => fetch(url).then(res => res.json())))
+//   .then(([amsterdamData, bernData, dublinData, kopenhagenData, lissabonData, madridData, pragData, romData]) => {
+//     uv_amsterdam = amsterdamData;
+//     uv_bern = bernData;
+//     uv_dublin = dublinData;
+//     uv_kopenhagen = kopenhagenData;
+//     uv_lissabon = lissabonData;
+//     uv_madrid = madridData;
+//     uv_prag = pragData;
+//     uv_rom = romData;
+
+
+
+//     const ctx = document.querySelector('#myChart').getContext("2d");
+//     chartInstance = new Chart(ctx, {
+//       type: "line", // "line", "pie", "doughnut", "polarArea", "radar"
+//       data: {
+//         labels: ["vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen", "vorgestern", "gestern", "heute"],
+//         datasets: []
+//       }
+//     });
+
+//     // Dropdown-Menü Funktionalität
+
+
+//     const locationButton = document.getElementById("locationButton");
+//     const dropdownMenu = document.getElementById("dropdownMenu");
+
+//     locationButton.addEventListener("click", () => {
+//       dropdownMenu.classList.toggle("hidden");
+//     });
+
+//     const cityData = {
+//       Amsterdam: uv_amsterdam,
+//       Bern: uv_bern,
+//       Dublin: uv_dublin,
+//       Kopenhagen: uv_kopenhagen,
+//       Lissabon: uv_lissabon,
+//       Madrid: uv_madrid,
+//       Prag: uv_prag,
+//       Rom: uv_rom
+//     };
+
+//     // Klick auf Stadtname im Dropdown
+//     dropdownMenu.addEventListener("click", (event) => {
+//       if (event.target.tagName === "LI") {
+//         const city = event.target.dataset.city;
+//         locationButton.textContent = city + " ▼";
+//         dropdownMenu.classList.add("hidden");
+
+//         console.log("Ausgewählte Stadt:", city);
+
+//         updateChart(city);
+//         // Hier später: Funktion aufrufen, um das Diagramm zu aktualisieren
+//         // updateChart(city);
+//       }
+//     });
+
+
+
+//     // Schließt das Menü, wenn außerhalb geklickt wird
+//     document.addEventListener("click", (event) => {
+//       if (!locationButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+//         dropdownMenu.classList.add("hidden");
+//       }
+//     });
+
+//     // Chart-Aktualisierung
+//     function updateChart(city) {
+//       const uvValues = cityData[city];
+
+//       if (!uvValues) {
+//         console.error("Keine Daten für Stadt:", city);
+//         return;
+//       }
+
+//       chartInstance.data.datasets = [
+//         {
+//           label: `UV-Index ${city}`,
+//           data: uvValues,
+//           borderWidth: 2,
+//           borderColor: "rgba(75, 192, 192, 1)",
+//           backgroundColor: "rgba(75, 192, 192, 0.2)",
+//           tension: 0.3,
+//           fill: true
+//         }
+//       ];
+
+//       chartInstance.update();
+
+//       // ✅ Nur Marker der gewählten Stadt anzeigen
+//       const markers = document.querySelectorAll(".marker");
+//       markers.forEach(marker => {
+//         if (marker.dataset.city === city) {
+//           marker.style.display = "block"; // sichtbar
+//         } else {
+//           marker.style.display = "none"; // ausblenden
+//         }
+//       });
+//     }
+
+    
+//     const cities = [
+//       { name: "Amsterdam", top: 35, left: 51, uv: uv_amsterdam = [0] },
+//       { name: "Bern", top: 54, left: 55, uv: uv_bern[1] },
+//       { name: "Dublin", top: 28, left: 26, uv: uv_dublin[2] },
+//       { name: "Kopenhagen", top: 25, left: 65, uv: uv_kopenhagen[3] },
+//       { name: "Lissabon", top: 75, left: 10, uv: uv_lissabon[4] },
+//       { name: "Madrid", top: 72, left: 29, uv: uv_madrid[5] },
+//       { name: "Prag", top: 43, left: 70, uv: uv_prag[6] },
+//       { name: "Rom", top: 68.5, left: 65, uv: uv_rom[7] },
+//     ];
+
+//     console.log(cities);
+
+//     const mapContainer = document.querySelector(".europa-container");
+
+//     cities.forEach(city => {
+//       const marker = document.createElement("div");
+//       marker.classList.add("marker");
+//       marker.dataset.city = city.name;
+
+//       // Positionierung in Prozent
+//       marker.style.top = `${city.top}%`;
+//       marker.style.left = `${city.left}%`;
+
+//       // Farbe abhängig vom UV-Index
+//       let color;
+//       if (city.uv < 2) color = "rgb(145, 255, 186)";
+//       else if (city.uv < 6) color = "rgb(255, 255, 120)";
+//       else color = "rgb(255, 120, 120)";
+//       marker.style.backgroundColor = color;
+
+//       // Hover-Effekt (aufleuchten)
+//       marker.addEventListener("mouseenter", () => {
+//         marker.style.boxShadow = `0 0 20px ${color}`;
+//       });
+//       marker.addEventListener("mouseleave", () => {
+//         marker.style.boxShadow = "none";
+//       });
+
+//       mapContainer.appendChild(marker);
+//     });
+
+//     updateChart("Bern");
+
+//   })
+//   .catch(error => {
+//     console.error('Error:', error);
 //   });
-
-//   mapContainer.appendChild(marker);
-// });
-
-
-
-const locationButton = document.getElementById("locationButton");
-const dropdownMenu = document.getElementById("dropdownMenu");
-
-locationButton.addEventListener("click", () => {
-  dropdownMenu.classList.toggle("hidden");
-});
-
-// Klick auf Stadtname im Dropdown
-dropdownMenu.addEventListener("click", (event) => {
-  if (event.target.tagName === "LI") {
-    const city = event.target.dataset.city;
-    locationButton.textContent = city + " ▼";
-    dropdownMenu.classList.add("hidden");
-
-    console.log("Ausgewählte Stadt:", city);
-    // Hier später: Funktion aufrufen, um das Diagramm zu aktualisieren
-    // updateChart(city);
-  }
-});
-
-// Schließt das Menü, wenn außerhalb geklickt wird
-document.addEventListener("click", (event) => {
-  if (!locationButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-    dropdownMenu.classList.add("hidden");
-  }
-});

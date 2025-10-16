@@ -33,6 +33,8 @@ try {
 
     $rows = $stmt->fetchAll();
 
+    // print_r($rows);
+
     $uvvalues = [];
     foreach ($rows as $row) {
         $uvvalues[] = $row['uvindex'];

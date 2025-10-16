@@ -222,7 +222,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;   /* füllt die linke untere Fläche komplett */
   width: 100%;
 }
 
@@ -233,6 +232,7 @@
   object-fit: contain;
   margin: 18px;
   display: block;
+  z-index: 1;
 }
 
 /* .amsterdam-dot{
@@ -247,12 +247,13 @@
 
 .marker {
   position: absolute;
-  width: 18px;
-  height: 18px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 2;
 }
 
 .marker:hover {
