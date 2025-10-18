@@ -5,6 +5,8 @@
     font-family: MuseoModerno, sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 
@@ -211,7 +213,7 @@
 .left-bottom {
   flex: 0 0 65%;
   background-color: #7ea7e0;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
 }
@@ -230,7 +232,7 @@
   height: auto;
   max-height: 100%;
   object-fit: contain;
-  margin: 18px;
+  /* margin: 18px; */
   display: block;
   z-index: 1;
 }
@@ -382,7 +384,7 @@
   justify-content: center;
 }
 
-.info-container{
+.uv-container{
   display:column;
   width: 90%;
   height: auto;
@@ -393,17 +395,16 @@
   font-size: 20px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 5%;
 }
 
-.info-container h3 {
+.uv-container h3 {
   font-size: 40px;
   margin-bottom: 20px;
   background-color: transparent;
   text-shadow: 10px 8px 10px rgba(255,235,145,1);
 }
 
-.info-container p {
+.uv-container p {
   font-size: 30px;
   line-height: 1.5;
   background-color: transparent;

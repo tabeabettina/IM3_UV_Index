@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +8,7 @@
 
     <title>Eurotan Startpage</title>
 </head>
+
 <body>
 
     <div class="layout">
@@ -26,19 +28,25 @@
             </div>
 
             <div class="left-bottom">
-                <div class="welcome-container">
-
+                <div id= "welcomeBox" class="welcome-container">
+                    <h2>Wilkomme bi Eurotan!</h2>
+                    <p>Klicke durch Europa</p>
+                </div>
+                <div id="infoBox" class="info-container hidden">
+                    <h2 id="cityName"></h2>
+                    <div id="uvCircle" style="width:60px; height:60px; border-radius:50%; margin:10px auto;"></div>
+                    <p id="uvValue"></p>
                 </div>
             </div>
         </div>
 
         <div class="right">
             <div class="right-top">
-                <div class ="button-container">
+                <div class="button-container">
                     <button class="karte-button">
-                      <p>Karte</p>
+                        <p>Karte</p>
                     </button>
-        
+
                     <button class="analyse-button">
                         <p>Analyse</p>
                     </button>
@@ -46,7 +54,7 @@
             </div>
 
             <div class="right-middle">
-                <div class= "europa-container">
+                <div class="europa-container">
                     <img src="/IMG/Europa_klein.png" alt="Europa" class="europa-image">
                 </div>
             </div>
@@ -54,9 +62,9 @@
 
 
 
-    </div>
+        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
+        <script src="script2.js"></script>
 </body>
+
 </html>

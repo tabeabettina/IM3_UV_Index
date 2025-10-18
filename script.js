@@ -197,8 +197,8 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
       });
     }
 
-    // Standardmäßig Bern anzeigen
-    updateChart("Bern");
+    // Standardmäßig Amsterdam anzeigen
+    updateChart("Amsterdam");
   })
   .catch(error => {
     console.error('Error:', error);

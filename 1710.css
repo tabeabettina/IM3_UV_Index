@@ -1,15 +1,10 @@
-* {
+*{
     background-color: rgb(175, 175, 255);
+    /* font-size: 18px; */
     letter-spacing: 0.1em;
     font-family: MuseoModerno, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;  /* 👈 Verhindert, dass Padding/Margin Layout sprengen */
-}
-
-html, body {
-    height: 100%;
-    overflow: hidden; /* 👈 verhindert ungewolltes Scrollen */
 }
 
 
@@ -20,8 +15,8 @@ html, body {
 
 .layout {
   display: flex;
-  height: 100vh;
-  width: 100%;  /* 👈 war vorher 100vw – das verursacht Überlauf */
+  height: 100vh;   /* gesamte Bildschirmhöhe */
+  width: 100vw;    /* gesamte Bildschirmbreite */
   margin: 0;
 }
 
@@ -95,12 +90,14 @@ html, body {
   justify-content: center;
 }
 
+
+
 /* Welcome container */
 
 .welcome-container {
   width: 80%;
   height: 80%;
-  background-color: rgba(255, 255, 255, 0.8); 
+  background-color: rgba(255, 255, 255, 0.8); /* leicht transparentes Weiss */
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -110,13 +107,14 @@ html, body {
   padding: 20px;
 }
 
+
 /* Aktuelle Baustelle Infocontainer */
 
 
 .info-container {
   width: 80%;
   height: 80%;
-  background-color: rgba(145, 255, 186);
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -156,6 +154,7 @@ html, body {
 
 
 
+
 /* * right side top im Layout 15% */ 
 
 .right-top {
@@ -164,8 +163,7 @@ html, body {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  padding-right: 90px;  /* 👈 ersetzt margin-right */
-  box-sizing: border-box;
+  margin-right: 90px;
 }
 
 /* Buttons */
