@@ -20,14 +20,14 @@ const urls = [
 ];
 
 const cities = [
-  { name: "Amsterdam", top: 35, left: 51 },
+  { name: "Amsterdam", top: 32, left: 51 },
   { name: "Bern", top: 54, left: 55 },
-  { name: "Dublin", top: 28, left: 26 },
-  { name: "Kopenhagen", top: 22, left: 65 },
-  { name: "Lissabon", top: 75, left: 10 },
-  { name: "Madrid", top: 72, left: 29 },
+  { name: "Dublin", top: 24, left: 30 },
+  { name: "Kopenhagen", top: 21, left: 63 },
+  { name: "Lissabon", top: 80, left: 16 },
+  { name: "Madrid", top: 76, left: 30 },
   { name: "Prag", top: 43, left: 70 },
-  { name: "Rom", top: 68.5, left: 65 },
+  { name: "Rom", top: 74, left: 65 },
 ];
 
 const mapContainer = document.querySelector(".europa-container");
@@ -91,9 +91,11 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
 
         // Farbe nach UV-Wert
         let color;
-        if (currentUV < 2) color = "rgb(145, 255, 186)";
-        else if (currentUV < 6) color = "rgb(255, 255, 120)";
-        else color = "rgb(255, 120, 120)";
+        if (currentUV <= 2) color = "rgb(145, 255, 186)";        // 🌿 Grün: 0–2
+        else if (currentUV <= 4) color = "rgb(255, 255, 120)";   // ☀️ Gelb: 3–4
+        else if (currentUV <= 6) color = "rgb(255, 190, 120)";   // 🟧 Orange: 5–6
+        else if (currentUV <= 9) color = "rgb(255, 120, 120)";   // 🔥 Rot: 7–9
+        else color = "rgb(180, 0, 0)";                           // 🩸 Dunkelrot: 10+
 
         // Welcome Box verstecken, InfoBox zeigen
         welcomeBox.classList.add("hidden");

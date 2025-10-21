@@ -2,6 +2,8 @@
 // 🌤️ UV-Index Visualisierung
 // -------------------------------
 
+
+
 let uv_amsterdam = [];
 let uv_bern = [];
 let uv_dublin = [];
@@ -67,7 +69,7 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
     chartInstance = new Chart(ctx, {
       type: "line",
       data: {
-        labels: ["vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen", "vorgestern", "gestern", "heute"],
+        labels: ["vor 10", "vor 9 Tagen", "vor 8 Tagen", "vor 7 Tagen", "vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen", "vorgestern", "gestern", "heute"],
         datasets: []
       }
     });
@@ -96,11 +98,13 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
       marker.style.top = `${city.top}%`;
       marker.style.left = `${city.left}%`;
 
-      // 🔥 Farbe abhängig vom UV-Index (interaktiv, wie bisher)
+      // 🔥 Farbe abhängig vom UV-Index 
       let color;
-      if (city.uv < 2) color = "rgb(145, 255, 186)";      // grün
-      else if (city.uv < 6) color = "rgb(255, 255, 120)"; // gelb
-      else color = "rgb(255, 120, 120)";                  // rot
+      if (city.uv <= 2) color = "rgb(0, 200, 0)";         // grün
+      else if (city.uv <= 4) color = "rgb(255, 230, 0)";  // gelb
+      else if (city.uv <= 6) color = "rgb(255, 165, 0)";  // orange
+      else if (city.uv <= 9) color = "rgb(255, 0, 0)";    // rot
+      else color = "rgb(139, 0, 0)"; 
 
       marker.style.backgroundColor = color;
 

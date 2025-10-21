@@ -4,7 +4,7 @@
     font-family: MuseoModerno, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;  /* 👈 Verhindert, dass Padding/Margin Layout sprengen */
+   /* box-sizing: border-box;   👈 Verhindert, dass Padding/Margin Layout sprengen */
 }
 
 html, body {
@@ -99,16 +99,50 @@ html, body {
 
 .welcome-container {
   width: 80%;
-  height: 80%;
-  background-color: rgba(255, 255, 255, 0.8); 
+  height: 75%;
+  background-color: rgb(145, 255, 186);
+  border: 10px solid white;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 20px;
+  padding: 3%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
+
+.welcome-container h2 {
+  font-size: 40px;
+  line-height: 1.5;
+  background-color: transparent;
+  text-shadow: 10px 8px 10px rgba(255,235,145,1);
+  padding: 3%;
+  background-color: transparent;
+}
+
+.welcome-container h3 {
+  font-size: 25px;
+  line-height: 1.5;
+  padding-left: 3%;
+  background-color: transparent;
+  color:rgb(140, 140, 229);
+  text-shadow: 10px 8px 10px rgba(255,235,145,1);
+  font-weight: bolder;
+}
+
+.welcome-container p {
+  font-size: 28px;
+  line-height: 1.5;
+  padding: 3%;
+  background-color: transparent;
+}
+
+
+
+
+
+
+
 
 /* Aktuelle Baustelle Infocontainer */
 
@@ -116,14 +150,14 @@ html, body {
 .info-container {
   width: 80%;
   height: 80%;
-  background-color: rgba(145, 255, 186);
+  background-color: rgb(145, 255, 186);
+  border: 10px solid white;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 20px;
   transition: opacity 0.3s ease;
 }
 
@@ -147,7 +181,7 @@ html, body {
 }
 
 #uvValue {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   color: #333;
 }
