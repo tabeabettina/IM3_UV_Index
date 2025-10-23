@@ -4,7 +4,6 @@
     font-family: MuseoModerno, sans-serif;
     margin: 0;
     padding: 0;
-   /* box-sizing: border-box;   👈 Verhindert, dass Padding/Margin Layout sprengen */
 }
 
 html, body {
@@ -40,11 +39,11 @@ html, body {
 /* left side top im Layout 35% */
 
 .left-top {
-  flex: 0 0 35%;
+  flex: 0 0 20%;
   background-color: #a7c7ff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin-top: 2%;
 }
 
 /* === Title / Subtitle === */
@@ -88,17 +87,18 @@ html, body {
 /* left side bottom im Layout 65% */
 
 .left-bottom {
-  flex: 0 0 65%;
+  flex: 0 0 80%;
   background-color: #7ea7e0;
   display: flex;
   align-items: center;
   justify-content: center;
+  position:relative
 }
 
 /* Welcome container */
 
 .welcome-container {
-  width: 80%;
+  /* width: 80%;
   height: 75%;
   background-color: rgb(145, 255, 186);
   border: 10px solid white;
@@ -107,7 +107,22 @@ html, body {
   flex-direction: column;
   justify-content: center;
   padding: 3%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+
+  width: 80%;
+  background-color: rgb(145, 255, 186);
+  border: 10px solid white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: start;
+  padding: 3%;
+  box-sizing: border-box;
+  transition: opacity 0.3s ease;
+
+  
 
 }
 
@@ -137,14 +152,6 @@ html, body {
   background-color: transparent;
 }
 
-
-
-
-
-
-
-
-/* Aktuelle Baustelle Infocontainer */
 
 
 .info-container {
@@ -199,12 +206,12 @@ html, body {
   border: 3px solid #333;
 }
 
-.uv-display {
+/* .uv-display {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-}
+} */
 
 
 #uvValue {

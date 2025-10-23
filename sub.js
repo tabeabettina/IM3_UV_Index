@@ -69,7 +69,7 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
     chartInstance = new Chart(ctx, {
       type: "line",
       data: {
-        labels: ["vor 10", "vor 9 Tagen", "vor 8 Tagen", "vor 7 Tagen", "vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen", "vorgestern", "gestern", "heute"],
+        labels: ["vor 10", "vor 9 Tagen", "vor 8 Tagen", "vor 7 Tagen", "vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen", "vorgestern", "gestern"],
         datasets: []
       }
     });
@@ -78,14 +78,14 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
     // 📍 Karte mit Städten
     // -------------------------------
     const cities = [
-      { name: "Amsterdam", top: 35, left: 51, uv: uv_amsterdam.at(-1) },
-      { name: "Bern", top: 54, left: 55, uv: uv_bern.at(-1) },
-      { name: "Dublin", top: 28, left: 26, uv: uv_dublin.at(-1) },
-      { name: "Kopenhagen", top: 25, left: 65, uv: uv_kopenhagen.at(-1) },
-      { name: "Lissabon", top: 75, left: 10, uv: uv_lissabon.at(-1) },
-      { name: "Madrid", top: 72, left: 29, uv: uv_madrid.at(-1) },
+      { name: "Amsterdam", top: 34, left: 51, uv: uv_amsterdam.at(-1) },
+      { name: "Bern", top: 55, left: 55, uv: uv_bern.at(-1) },
+      { name: "Dublin", top: 25, left: 26, uv: uv_dublin.at(-1) },
+      { name: "Kopenhagen", top: 21, left: 65, uv: uv_kopenhagen.at(-1) },
+      { name: "Lissabon", top: 79, left: 10, uv: uv_lissabon.at(-1) },
+      { name: "Madrid", top: 75, left: 26, uv: uv_madrid.at(-1) },
       { name: "Prag", top: 43, left: 70, uv: uv_prag.at(-1) },
-      { name: "Rom", top: 68.5, left: 65, uv: uv_rom.at(-1) },
+      { name: "Rom", top: 74, left: 67, uv: uv_rom.at(-1) },
     ];
 
     const mapContainer = document.querySelector(".europa-container");

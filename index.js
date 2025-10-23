@@ -30,7 +30,7 @@ const cities = [
   { name: "Kopenhagen", top: 21, left: 63 },
   { name: "Lissabon", top: 80, left: 16 },
   { name: "Madrid", top: 76, left: 30 },
-  { name: "Prag", top: 43, left: 70 },
+  { name: "Prag", top: 43, left: 68 },
   { name: "Rom", top: 74, left: 65 }
 ];
 

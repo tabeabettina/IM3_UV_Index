@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="sub.css">
+  <title>Eurotan</title>
+</head>
+
+<body>
+
+  <div class="layout">
+    <!-- LEFT SIDE -->
+    <div class="left">
+      <div class="left-top">
+        <div class="title">
+          <img src="IMG/Logo.png" alt="Eurotan Logo">
+          <h1>Eurotan</h1>
+        </div>
+
+        <div class="subtitle">
+          <h2>Wo hets vöu Sonne gha? <br> Velecht in?</h2>
+
+          <div class="location-dropdown">
+            <button id="locationButton">Amsterdam ▼</button>
+            <ul id="dropdownMenu" class="hidden">
+              <li data-city="Amsterdam">Amsterdam</li>
+              <li data-city="Bern">Bern</li>
+              <li data-city="Dublin">Dublin</li>
+              <li data-city="Kopenhagen">Kopenhagen</li>
+              <li data-city="Lissabon">Lissabon</li>
+              <li data-city="Madrid">Madrid</li>
+              <li data-city="Prag">Prag</li>
+              <li data-city="Rom">Rom</li>
+              <li data-city="Vergleichen">Vergleichen</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="left-bottom">
+        <div class="europa-container">
+          <img src="/IMG/Europa_klein.png" alt="Europa" class="europa-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right">
+      <div class="right-top">
+        <div class="button-container">
+          <a href="index.html">
+            <button class="karte-button">
+              <p>Karte</p>
+            </button>
+          </a>
+          <button class="analyse-button">
+            <p>Analyse</p>
+          </button>
+        </div>
+      </div>
+
+      <div class="right-middle">
+        <div class="chart-container">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+
+      <div class="right-bottom">
+        <div class="uv-container">
+          <h3>Caution UV-Strahlung!</h3>
+          <p>
+            Echli devo macht dech schön bruun #nice, z vöu devo macht dech zonere Tomate #notnice.
+            Om das am beste grad vo Afang ah z verhendere, esch Sonnecreme met LSF 50 emmer empfählenswärt.
+          </p>
+        </div>
+      </div>
+    </div> <!-- END RIGHT -->
+  </div> <!-- END LAYOUT -->
+
+  <!-- Chart + Script -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="sub.js"></script>
+
+</body>
+
+</html>

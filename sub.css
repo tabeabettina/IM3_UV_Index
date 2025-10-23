@@ -9,7 +9,8 @@
     /* overflow: hidden; */
 }
 
-body {
+html, body {
+  height: 100%;
   overflow: hidden;
 }
 
@@ -47,11 +48,11 @@ body {
 /* left side top im Layout 35% */
 
 .left-top {
-  flex: 0 0 35%;
+  flex: 0 0 30%;
   background-color: #a7c7ff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin-top: 2%;
 }
 
 /* === Title / Subtitle === */
@@ -80,7 +81,7 @@ body {
   display: grid;
   grid-template-columns: 1fr auto; 
   grid-template-rows: auto auto;   
-  margin-left: 90px;
+  margin-left: 10%;
   justify-content: space-between;
 }
 
@@ -121,7 +122,8 @@ body {
 }
 
 #dropdownMenu {
-  position: absolute;
+  /* position: absolute;
+  width: 200px;
   top: 110%;
   left: 0;
   background-color: white;
@@ -132,7 +134,23 @@ body {
   padding: 5px 0;
   margin: 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 10; */
+  position: absolute;
+  top: 110%;
+  margin-left: 10%;                     /* Mitte des Buttons/containers */
+     /* zentriert das Dropdown exakt */
+  background-color: white;
+  border: 2px solid rgb(145, 255, 186);
+  border-radius: 10px;
+  width: 220px;                  /* feste Breite — anpassen nach Bedarf */
+  min-width: 160px;              /* verhindert zu kleines Dropdown */
+  max-width: 90vw;               /* sicher gegen sehr kleine Bildschirme */
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;                 /* über anderen Elementen */
+  white-space: nowrap; 
 }
 
 #dropdownMenu li {
@@ -216,7 +234,7 @@ body {
 /* left side bottom im Layout 65% */
 
 .left-bottom {
-  flex: 0 0 65%;
+  flex: 0 0 70%;
   background-color: #7ea7e0;
   /* display: flex; */
   align-items: center;
