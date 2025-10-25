@@ -69,7 +69,7 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
     chartInstance = new Chart(ctx, {
       type: "line",
       data: {
-        labels: ["vor 10", "vor 9 Tagen", "vor 8 Tagen", "vor 7 Tagen", "vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen", "vorgestern", "gestern"],
+        labels: ["vor 10 Tagen", "vor 9 Tagen", "vor 8 Tagen", "vor 7 Tagen", "vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen", "vorgestern", "gestern"],
         datasets: []
       }
     });
