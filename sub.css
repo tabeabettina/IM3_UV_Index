@@ -1,445 +1,225 @@
-*{
-    background-color: rgb(175, 175, 255);
-    /* font-size: 18px; */
-    letter-spacing: 0.1em;
-    font-family: MuseoModerno, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* overflow: hidden; */
+/* === BASIS === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "MuseoModerno", sans-serif;
+  letter-spacing: 0.1em;
 }
 
 html, body {
   height: 100%;
+  width: 100%;
   overflow: hidden;
+  background-color: rgb(175, 175, 255);
 }
 
-
-@font-face {
-    font-family:"MuseoModerno";
-    src: url(MuseoModerno/static/MuseoModerno-Medium.ttf);
-}
-
-
-/* Basislayout: zwei Spalten nebeneinander */
 .layout {
   display: flex;
-  height: 100vh;   /* gesamte Bildschirmhöhe */
-  width: 100vw;    /* gesamte Bildschirmbreite */
-  margin: 0;
+  flex-wrap: wrap;
+  height: 100vh;
+  width: 100%;
 }
 
-/* Linke Spalte: 40% Breite */
-.left {
-  width: 40%;
+.left, .right {
+  flex: 1 1 50%;
   display: flex;
-  flex-direction: column;  /* Aufteilung nach oben/unten */
+  flex-direction: column;
+  min-width: 320px;
 }
 
-/* Rechte Spalte: 60% Breite */
-.right {
-  width: 60%;
-  display: flex;
-  flex-direction: column;  /* 3 Abschnitte untereinander */
-}
-
-
-
-/* left side top im Layout 35% */
-
+/* === LEFT TOP === */
 .left-top {
-  flex: 0 0 30%;
+  flex: 0 0 25vh;
   background-color: #a7c7ff;
   display: flex;
   flex-direction: column;
-  margin-top: 2%;
+  justify-content: center;
+  align-items: center;
 }
 
-/* === Title / Subtitle === */
-
 .title {
-    display: flex;
-    justify-content: center;
-    align-items: center; /* alles zentriert */
-    gap: 1rem; /* Abstand zwischen den Elementen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .title h1 {
-    font-size: 130px;
-    text-shadow: 20px 18px 20px rgba(255,235,145,1.2);
-    margin-top: 0px;
+  font-size: clamp(3rem, 6vw, 8rem);
+  text-shadow: 0.2em 0.2em 0.3em rgba(255,235,145,0.8);
 }
 
-.title img{
-  width: 300px;
+.title img {
+  width: clamp(120px, 15vw, 300px);
   height: auto;
-  margin-top: 0px;
 }
-
-
-.subtitle {
-  display: grid;
-  grid-template-columns: 1fr auto; 
-  grid-template-rows: auto auto;   
-  margin-left: 10%;
-  justify-content: space-between;
-}
-
 
 .subtitle h2 {
-  font-size: 60px;
-  font-weight: bolder;
-  text-shadow: 10px 15px 10px rgba(247, 179, 179, 1.2);
-  grid-column: 1 / -1; /* Text über beide Spalten */
-  margin-top: 20px;
+  font-size: clamp(1.5rem, 3vw, 3.5rem);
+  text-shadow: 0.15em 0.15em 0.25em rgba(247, 179, 179, 1);
 }
 
-
-/* Location-Button */
-
+/* === LOCATION DROPDOWN === */
 .location-dropdown {
   position: relative;
-  display: inline-block;
-  overflow: visible;
+  margin-top: 1rem;
 }
 
 #locationButton {
   background-color: white;
   border: 2px solid rgb(145, 255, 186);
   border-radius: 10px;
-  padding: 10px 20px;
-  font-size: 20px;
+  padding: 0.8rem 1.2rem;
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
   cursor: pointer;
-  font-family: inherit;
   color: #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#locationButton:hover {
-  background-color: rgb(240, 255, 240);
 }
 
 #dropdownMenu {
-  /* position: absolute;
-  width: 200px;
-  top: 110%;
-  left: 0;
-  background-color: white;
-  border: 2px solid rgb(145, 255, 186);
-  border-radius: 10px;
-  width: 100%;
-  list-style: none;
-  padding: 5px 0;
-  margin: 0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 10; */
   position: absolute;
   top: 110%;
-  margin-left: 10%;                     /* Mitte des Buttons/containers */
-     /* zentriert das Dropdown exakt */
+  left: 50%;
+  transform: translateX(-50%);
   background-color: white;
   border: 2px solid rgb(145, 255, 186);
   border-radius: 10px;
-  width: 220px;                  /* feste Breite — anpassen nach Bedarf */
-  min-width: 160px;              /* verhindert zu kleines Dropdown */
-  max-width: 90vw;               /* sicher gegen sehr kleine Bildschirme */
+  width: min(220px, 80vw);
   list-style: none;
-  padding: 5px 0;
-  margin: 0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;                 /* über anderen Elementen */
-  white-space: nowrap; 
+  padding: 0.4rem 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 10;
 }
 
 #dropdownMenu li {
-  padding: 10px;
-  cursor: pointer;
+  padding: 0.6rem;
   text-align: center;
-  font-size: 18px;
-  background-color: white;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
 }
 
 #dropdownMenu li:hover {
   background-color: rgb(230, 255, 230);
 }
 
-.hidden {
-  display: none;
-}
-
-
- /* .location-button {
-  grid-column: 2; 
-  grid-row: 2;    
-  height: 50px;
-  width: 220px;
-  border-radius: 10px;
-  background-color: white;
-  border: 5px solid rgb(145, 255, 186);
-  justify-self: end; 
-  margin-top: -60px;
-  margin-right: 80px;
-  z-index: 1;
-}
-
-  /* ✨ Text mittig ausrichten */
-
-  /* display: flex;
-  justify-content: center; 
-  align-items: center;      
-} */
-
-
-/* .location-button p {
-  font-size: 22px;
-  background-color: transparent;
-  align-items: center;
-  text-align: left;
-  margin: 20px;
-  text-shadow: none;
-
-}
-
-.select{
-  position: relative;
-  left: 20px;
-  height: 50px;
-  width: 50px;
-  background-color: rgb(147, 201, 167);
-  border-radius: 10px;
-  border: 5px solid rgb(145, 255, 186);
-}
-
-.select p{
-  position: relative;
-  top: -10px;
-  left: -3px;
-  font-size: 30px;
-  background-color: transparent;
-  align-items: center;
-  text-align: center;
-  margin: 14px;
-  color: white;
-  font-weight: bold;
-  text-shadow: none;
-}
-
-.select:hover {
-  background-color: rgb(110, 176, 145);
-  cursor: pointer;
-}  */
-
-
-/* left side bottom im Layout 65% */
-
+/* === LEFT BOTTOM === */
 .left-bottom {
-  flex: 0 0 70%;
+  flex: 1;
   background-color: #7ea7e0;
-  /* display: flex; */
-  align-items: center;
-  justify-content: center;
-}
-
-/* === Europa-Container === */
-.europa-container {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
 .europa-container img {
-  width: 35vw;     /* skaliert proportional zur Bildschirmbreite */
+  width: 35vw;
+  max-width: 600px;
   height: auto;
-  max-height: 100%;
   object-fit: contain;
-  /* margin: 18px; */
-  display: block;
-  z-index: 1;
 }
 
-/* .amsterdam-dot{
-  position: absolute;
-  height: 30px;
-  width: 30px;
-  border-radius: 15px;
-  background-color: blue;
-  right: 475px;
-  bottom: 150px;
-} */
-
-.marker {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  z-index: 2;
-}
-
-.marker:hover {
-  transform: translate(-50%, -50%) scale(1.4);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-}
-
-.marker::after {
-  content: attr(data-city);
-  position: absolute;
-  bottom: 120%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  color: #333;
-  padding: 4px 6px;
-  border-radius: 6px;
-  font-size: 12px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-
-.marker:hover::after {
-  opacity: 1;
-}
-
-
-
-
-/* right side top im Layout 15% */
-
+/* === RIGHT TOP === */
 .right-top {
-  flex: 0 0 15%;
+  flex: 0 0 15vh;
   background-color: #ffe59d;
   display: flex;
-  align-items: flex-end;
   justify-content: flex-end;
-  margin-right: 90px;
+  align-items: center;
+  padding-right: 5%;
 }
-
-/* Buttons */
 
 .button-container {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  height: 80px;   /* füllt die rechte untere Fläche komplett */
-  width: 330px;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.karte-button{
-  height: 50px;
-  width: 150px;
+.karte-button,
+.analyse-button {
+  flex: 1 1 45%;
+  min-width: 120px;
+  padding: 0.6rem 1.2rem;
   border-radius: 10px;
+  border: 0.3rem solid white;
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.karte-button {
   background-color: rgb(255, 146, 138);
-  border: 5px white solid;
 }
 
-.karte-button p{
-  font-size: 22px;
-  background-color: transparent;
-  text-shadow: none;
-  font-weight: bold;
-}
-
-/* .karte-button:hover {
-  background-color: rgb(255, 100, 90);
-  cursor: pointer;
-}
-
-.karte-button:active {
-  background-color: rgb(200, 50, 40);
-  cursor: pointer;
-} */
-
-
-.analyse-button{
-  height: 50px;
-  width: 150px;
-  border-radius: 10px;
+.analyse-button {
   background-color: rgb(189, 189, 189);
-  border: 5px white solid;
-}
-
-.analyse-button p{
-  font-size: 22px;
   color: rgb(105, 105, 105);
-  background-color: transparent;
-  text-shadow: none;
-  font-weight: bold;
 }
 
-
-/* right middle im Layout 55%  */
-
+/* === CHART === */
 .right-middle {
-  flex: 0 0 55%;
+  flex: 1;
   background-color: #fff2cc;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.chart-container{
-  display: flex;
-  width: 90%;
+.chart-container {
+  width: min(90%, 1000px);
   height: auto;
 }
 
 #myChart {
-  object-fit: contain;
+  width: 100%;
+  height: auto;
   background-color: white;
-  font-size: 24px;
 }
 
-
-/* right side bottom im Layout 30% */
-
+/* === UV INFO === */
 .right-bottom {
-  flex: 0 0 30%;
+  flex: 0 0 25vh;
   background-color: #c8e1d3;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.uv-container{
-  display:column;
-  width: 90%;
-  height: auto;
+.uv-container {
+  width: min(90%, 900px);
   background-color: rgb(145, 255, 186);
-  border: 10px solid white;
-  border-radius: 20px;
-  padding: 30px;
-  font-size: 20px;
+  border: 0.6rem solid white;
+  border-radius: 1.5rem;
+  padding: 2rem;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
 }
 
 .uv-container h3 {
-  font-size: 40px;
-  margin-bottom: 1%;
-  background-color: transparent;
-  text-shadow: 10px 8px 10px rgba(255,235,145,1);
+  font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+  text-shadow: 0.15em 0.15em 0.25em rgba(255,235,145,1);
 }
 
 .uv-container h2 {
-  font-size: 30px;
-  line-height: 1.5;
-  background-color: transparent;
+  font-size: clamp(1.4rem, 2vw, 2.2rem);
+  margin-top: 0.5rem;
 }
 
 .uv-container p {
-  font-size: 20px;
-  line-height: 1.5;
-  background-color: transparent;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
   font-style: italic;
-  margin-top: 1%;
+  margin-top: 0.5rem;
 }
 
+/* === MEDIA QUERIES === */
+@media (max-width: 1024px) {
+  .layout { flex-direction: column; }
+  .left, .right { width: 100%; }
+  .title { flex-direction: column; }
+  .subtitle { text-align: center; }
+}
 
+@media (max-width: 600px) {
+  .button-container { justify-content: center; }
+  .karte-button, .analyse-button { flex: 1 1 100%; }
+  .uv-container { width: 90%; padding: 1rem; }
+}

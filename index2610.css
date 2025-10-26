@@ -1,0 +1,465 @@
+* {
+    background-color: rgb(175, 175, 255);
+    letter-spacing: 0.1em;
+    font-family: MuseoModerno, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden; /* 👈 verhindert ungewolltes Scrollen */
+}
+
+
+@font-face {
+    font-family:"MuseoModerno";
+    src: url(MuseoModerno/static/MuseoModerno-Medium.ttf);
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;  /* 👈 war vorher 100vw – das verursacht Überlauf */
+  margin: 0;
+}
+
+.left {
+  width: 40%;
+  display: flex;
+  flex-direction: column;  /* Aufteilung nach oben/unten */
+}
+
+.right {
+  width: 60%;
+  display: flex;
+  flex-direction: column;  /* 2 Abschnitte untereinander */
+}
+
+/* left side top im Layout 35% */
+
+.left-top {
+  flex: 0 0 20%;
+  background-color: #a7c7ff;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2%;
+}
+
+/* === Title / Subtitle === */
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* alles zentriert */
+    gap: 1rem; /* Abstand zwischen den Elementen */
+}
+
+.title h1 {
+    font-size: 130px;
+    text-shadow: 20px 18px 20px rgba(255,235,145,1.2);
+    margin-top: 0px;
+}
+
+.title img{
+  width: 300px;
+  height: auto;
+  margin-top: 0px;
+}
+
+
+.subtitle {
+  display: grid;
+  grid-template-columns: 1fr auto; /* Text nimmt Platz, Button rechts */
+  grid-template-rows: auto auto;   /* zwei Zeilen */
+  margin-left: 90px;
+}
+
+.subtitle h2 {
+  font-size: 60px;
+  font-weight: bolder;
+  text-shadow: 10px 15px 10px rgba(247, 179, 179, 1.2);
+  grid-column: 1 / -1; /* Text über beide Spalten */
+  margin-top: 20px;
+}
+
+
+/* left side bottom im Layout 65% */
+
+.left-bottom {
+  flex: 0 0 80%;
+  background-color: #7ea7e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position:relative
+}
+
+/* Welcome container */
+
+.welcome-container {
+  /* width: 80%;
+  height: 75%;
+  background-color: rgb(145, 255, 186);
+  border: 10px solid white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+
+  width: 80%;
+  background-color: rgb(145, 255, 186);
+  border: 10px solid white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: start;
+  padding: 3%;
+  box-sizing: border-box;
+  transition: opacity 0.3s ease;
+
+  
+
+}
+
+.welcome-container h2 {
+  font-size: 40px;
+  line-height: 1.5;
+  background-color: transparent;
+  text-shadow: 10px 8px 10px rgba(255,235,145,1);
+  padding: 3%;
+  background-color: transparent;
+}
+
+.welcome-container h3 {
+  font-size: 25px;
+  line-height: 1.5;
+  padding-left: 3%;
+  background-color: transparent;
+  color:rgb(140, 140, 229);
+  text-shadow: 10px 8px 10px rgba(255,235,145,1);
+  font-weight: bolder;
+}
+
+.welcome-container p {
+  font-size: 28px;
+  line-height: 1.5;
+  padding: 3%;
+  background-color: transparent;
+}
+
+
+
+.info-container {
+  width: 80%;
+  background-color: rgb(145, 255, 186);
+  border: 10px solid white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: flex-start;
+  padding: 3%;
+  box-sizing: border-box;
+  transition: opacity 0.3s ease;
+}
+
+
+.hidden {
+  display: none;
+}
+
+.info-container h2 {
+  font-size: 40px;
+  line-height: 1.5;
+  background-color: transparent;
+  text-shadow: 10px 8px 10px rgba(255,235,145,1);
+  padding-left: 3%;
+  padding-top: 3%;
+  background-color: transparent;
+}
+
+.info-container p {
+  font-size: 30px;
+  margin-bottom: 10px;
+  background-color: transparent;
+  padding-left: 3%;
+  padding-bottom: 3%;
+}
+
+/* #uvCircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 10px auto;
+  border: 3px solid #333;
+} */
+
+
+/* Kreis und UV-Wert nebeneinander */
+.uv-row {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Abstand zwischen Kreis und Zahl */
+  padding: 3%;
+  background-color: transparent;
+}
+
+#uvCircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  /* border: 3px solid #333; */
+  margin: 0; 
+}
+
+#uvValue {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+
+
+/* .uv-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 3px solid #333;
+}
+
+
+#uvValue {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+} */
+
+#uvInfo {
+  font-style: italic;
+  margin-top: 5px;
+}
+
+
+
+
+
+/* * right side top im Layout 15% */ 
+
+.right-top {
+  flex: 0 0 15%;
+  background-color: #ffe59d;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-right: 90px;  /* 👈 ersetzt margin-right */
+  box-sizing: border-box;
+}
+
+/* Buttons */
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  height: 80px;   /* füllt die rechte untere Fläche komplett */
+  width: 330px;
+  gap: 2rem;
+}
+
+.karte-button{
+  height: 50px;
+  width: 150px;
+  border-radius: 10px;
+  background-color: rgb(189, 189, 189);
+  border: 5px white solid;
+}
+
+.karte-button p{
+  font-size: 22px;
+  color: rgb(105, 105, 105);
+  background-color: transparent;
+  text-shadow: none;
+  font-weight: bold;
+}
+
+/* .karte-button:hover {
+  background-color: rgb(255, 100, 90);
+  cursor: pointer;
+}
+
+.karte-button:active {
+  background-color: rgb(200, 50, 40);
+  cursor: pointer;
+} */
+
+
+.analyse-button{
+  height: 50px;
+  width: 150px;
+  border-radius: 10px;
+  background-color: rgb(255, 146, 138);
+  border: 5px white solid;
+}
+
+.analyse-button p{
+  font-size: 22px;
+  background-color: transparent;
+  text-shadow: none;
+  font-weight: bold;
+}
+
+/* right middle im Layout 85%  */
+
+.right-middle {
+  flex: 0 0 85%;
+  background-color: #fff2cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === Europa-Container === */
+.europa-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.europa-container img {
+  width: 75%;     /* skaliert proportional zur Bildschirmbreite */
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.marker {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 2;
+}
+
+.marker:hover {
+  transform: translate(-50%, -50%) scale(1.4);
+}
+
+/* Tooltip für Stadtnamen */
+.marker::after {
+  content: attr(data-city);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: #333;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.marker:hover::after {
+  opacity: 1;
+}
+
+
+/* === Default: 4K Desktop === */
+/* Dein bestehendes Design bleibt wie es ist */
+
+/* === Laptop / Normaler Desktop === */
+@media (max-width: 1440px) {
+  .left {
+    width: 45%;
+  }
+  .right {
+    width: 55%;
+  }
+  .title h1 {
+    font-size: 90px;
+  }
+  .subtitle h2 {
+    font-size: 45px;
+  }
+  .welcome-container, .info-container {
+    width: 85%;
+  }
+}
+
+/* === Tablet === */
+@media (max-width: 1024px) {
+  .layout {
+    flex-direction: column;
+  }
+  .left, .right {
+    width: 100%;
+  }
+  .left-top {
+    flex: 0 0 auto;
+  }
+  .left-bottom {
+    flex: 1;
+  }
+  .right-top {
+    justify-content: center;
+    padding-right: 0;
+  }
+  .title h1 {
+    font-size: 70px;
+  }
+  .subtitle h2 {
+    font-size: 35px;
+  }
+  .karte-button, .analyse-button {
+    width: 130px;
+    height: 45px;
+  }
+}
+
+/* === Mobile (Hochformat) === */
+@media (max-width: 480px) {
+  body {
+    overflow: auto; /* erlaubt Scrollen */
+  }
+  .layout {
+    flex-direction: column;
+  }
+  .title img {
+    width: 120px;
+  }
+  .title h1 {
+    font-size: 50px;
+  }
+  .subtitle h2 {
+    font-size: 25px;
+  }
+  .welcome-container, .info-container {
+    width: 95%;
+    border-width: 5px;
+    border-radius: 15px;
+  }
+  .button-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .karte-button, .analyse-button {
+    width: 100%;
+  }
+}

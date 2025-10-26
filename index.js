@@ -78,22 +78,28 @@ Promise.all(
 
       // Farbe nach UV-Wert
       let color;
+      let glow;
       let infoText = "";
       if (currentUV <= 2) {
-        color = "rgb(145, 255, 186)";
-        infoText = "Unbedenklich – Sonne geniessen 😎";
+        color = "rgba(0, 200, 0, 1)";
+        glow = "0 0 20px rgba(0, 200, 0, 0.8)";
+        infoText = "Brrr... hemmer Winter?!?";
       } else if (currentUV <= 4) {
-        color = "rgb(255, 255, 120)";
-        infoText = "Leichte Vorsicht – Sonnencreme empfohlen 🧴";
+        color = "rgba(255, 255, 65, 1)";
+        glow = "0 0 25px rgba(255, 255, 65, 0.8)";
+        infoText = "Es chonnt langsam, sueche mer doch mal en Sonneplatz :)";
       } else if (currentUV <= 6) {
-        color = "rgb(255, 190, 120)";
-        infoText = "Mässig stark – Cap und Sonnencreme nicht vergessen! 🧢";
+        color = "rgba(253, 174, 89, 1)";
+        glow = "0 0 25px rgba(253, 174, 89, 0.9)";
+        infoText = "Perfekt zom bruun wärde, aber regelmässig icreme!";
       } else if (currentUV <= 9) {
-        color = "rgb(255, 120, 120)";
-        infoText = "Sehr stark! Schatten aufsuchen, Haut schützen ☀️";
+        color = "rgba(250, 66, 66, 1)";
+        glow = "0 0 30px rgba(250, 66, 66, 0.9)";
+        infoText = "Onchillig, me werd eher rot als brun :(";
       } else {
-        color = "rgb(180, 0, 0)";
-        infoText = "Extrem gefährlich – Sonne meiden! 🛑";
+        color = "rgba(129, 7, 7, 1)";
+        glow = "0 0 35px rgba(129, 7, 7, 1)";
+        infoText = "Vöu z'vöu Sonne – Bleiben Sie zu Hause!!!";
       }
 
       // Welcome Box verstecken, InfoBox zeigen
@@ -103,7 +109,7 @@ Promise.all(
       // Inhalte aktualisieren
       cityNameElem.textContent = cityName;
       uvCircle.style.backgroundColor = color;
-      uvValueElem.textContent = `Aktueller UV-Index: ${currentUV}`;
+      uvValueElem.textContent = `Aktuelle UV-Strahlung: ${currentUV}`;
       uvInfoElem.textContent = infoText;
 
       // kleiner "Pop"-Effekt

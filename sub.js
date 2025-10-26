@@ -100,10 +100,10 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
 
       // 🔥 Farbe abhängig vom UV-Index 
       let color;
-      if (city.uv <= 2) color = "rgb(0, 200, 0)";         // grün
-      else if (city.uv <= 4) color = "rgb(255, 230, 0)";  // gelb
-      else if (city.uv <= 6) color = "rgb(255, 165, 0)";  // orange
-      else if (city.uv <= 9) color = "rgb(255, 0, 0)";    // rot
+      if (city.uv <= 2) color = "rgb(0, 200, 0)";
+      else if (city.uv <= 4) color = "rgb(255, 230, 0)";
+      else if (city.uv <= 6) color = "rgb(255, 165, 0)";
+      else if (city.uv <= 9) color = "rgb(255, 0, 0)"; 
       else color = "rgb(139, 0, 0)"; 
 
       marker.style.backgroundColor = color;
