@@ -1,9 +1,8 @@
 // -------------------------------
-// 🌤️ UV-Index Visualisierung
+// 🌤️ UV-Index Visualisierung (Eurotan Subpage)
 // -------------------------------
 
-
-
+// --- Datenspeicher für Städte ---
 let uv_amsterdam = [];
 let uv_bern = [];
 let uv_dublin = [];
@@ -13,6 +12,7 @@ let uv_madrid = [];
 let uv_prag = [];
 let uv_rom = [];
 
+// --- URLs für Datenabruf ---
 const urls = [
   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Amsterdam',
   'https://im3-uv.ramisberger-tabea.ch/unload.php?city=Bern',
@@ -26,9 +26,7 @@ const urls = [
 
 let chartInstance;
 
-// -------------------------------
-// 🎨 Feste Farben für Diagramm-Linien
-// -------------------------------
+// --- Feste Farben für Diagramm-Linien ---
 const cityColors = {
   Amsterdam: "#E74C3C", // Rot
   Bern: "#27AE60",      // Grün
@@ -65,17 +63,48 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
       Rom: uv_rom
     };
 
+    // -------------------------------
+    // 🧭 Chart.js Setup
+    // -------------------------------
     const ctx = document.querySelector('#myChart').getContext("2d");
+
     chartInstance = new Chart(ctx, {
       type: "line",
       data: {
-        labels: ["vor 10 Tagen", "vor 9 Tagen", "vor 8 Tagen", "vor 7 Tagen", "vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen", "vorgestern", "gestern"],
+        labels: [
+          "vor 10 Tagen", "vor 9 Tagen", "vor 8 Tagen", "vor 7 Tagen",
+          "vor 6 Tagen", "vor 5 Tagen", "vor 4 Tagen", "vor 3 Tagen",
+          "vorgestern", "gestern"
+        ],
         datasets: []
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: 10 },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "UV-Index",
+              font: { size: 16, weight: "bold" }
+            }
+          },
+          x: {
+            ticks: { font: { size: 12 } }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: { font: { size: 14 } }
+          }
+        }
       }
     });
 
     // -------------------------------
-    // 📍 Karte mit Städten
+    // 🗺️ Karte mit UV-Markern
     // -------------------------------
     const cities = [
       { name: "Amsterdam", top: 34, left: 51, uv: uv_amsterdam.at(-1) },
@@ -98,17 +127,23 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
       marker.style.top = `${city.top}%`;
       marker.style.left = `${city.left}%`;
 
-      // 🔥 Farbe abhängig vom UV-Index 
+      // 🔥 Farbe nach UV-Wert
       let color;
       if (city.uv <= 2) color = "rgb(0, 200, 0)";
       else if (city.uv <= 4) color = "rgb(255, 230, 0)";
       else if (city.uv <= 6) color = "rgb(255, 165, 0)";
-      else if (city.uv <= 9) color = "rgb(255, 0, 0)"; 
-      else color = "rgb(139, 0, 0)"; 
+      else if (city.uv <= 9) color = "rgb(255, 0, 0)";
+      else color = "rgb(139, 0, 0)";
 
       marker.style.backgroundColor = color;
+      marker.style.position = "absolute";
+      marker.style.width = "18px";
+      marker.style.height = "18px";
+      marker.style.borderRadius = "50%";
+      marker.style.cursor = "pointer";
+      marker.style.transition = "box-shadow 0.3s ease";
 
-      // Hover-Effekt
+      // 🌟 Glow-Effekt beim Hover
       marker.addEventListener("mouseenter", () => {
         marker.style.boxShadow = `0 0 20px ${color}`;
       });
@@ -120,12 +155,13 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
     });
 
     // -------------------------------
-    // 📋 Dropdown-Funktionalität
+    // 📋 Dropdown-Menü Logik
     // -------------------------------
     const locationButton = document.getElementById("locationButton");
     const dropdownMenu = document.getElementById("dropdownMenu");
 
-    locationButton.addEventListener("click", () => {
+    locationButton.addEventListener("click", (event) => {
+      event.stopPropagation();
       dropdownMenu.classList.toggle("hidden");
     });
 
@@ -135,12 +171,11 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
         locationButton.textContent = city + " ▼";
         dropdownMenu.classList.add("hidden");
 
-        console.log("Ausgewählte Stadt:", city);
         updateChart(city);
       }
     });
 
-    // Schließt Dropdown bei Klick außerhalb
+    // Dropdown außerhalb schließen
     document.addEventListener("click", (event) => {
       if (!locationButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
         dropdownMenu.classList.add("hidden");
@@ -148,11 +183,10 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
     });
 
     // -------------------------------
-    // 📈 Chart-Aktualisierung
+    // 📈 Chart aktualisieren
     // -------------------------------
     function updateChart(city) {
       if (city === "Vergleichen") {
-        // Alle Städte gleichzeitig anzeigen
         const datasets = Object.keys(cityData).map(cityName => ({
           label: `UV-Index ${cityName}`,
           data: cityData[cityName],
@@ -165,15 +199,14 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
         chartInstance.data.datasets = datasets;
         chartInstance.update();
 
-        // Alle Marker sichtbar machen
+        // Alle Marker anzeigen
         document.querySelectorAll(".marker").forEach(marker => {
           marker.style.display = "block";
         });
-
         return;
       }
 
-      // Nur eine Stadt anzeigen
+      // Nur eine Stadt
       const uvValues = cityData[city];
       if (!uvValues) {
         console.error("Keine Daten für Stadt:", city);
@@ -194,19 +227,20 @@ Promise.all(urls.map(url => fetch(url).then(res => res.json())))
 
       chartInstance.update();
 
-      // Nur Marker der gewählten Stadt anzeigen
-      const markers = document.querySelectorAll(".marker");
-      markers.forEach(marker => {
+      // Nur gewählte Stadt zeigen
+      document.querySelectorAll(".marker").forEach(marker => {
         marker.style.display = (marker.dataset.city === city) ? "block" : "none";
       });
     }
 
-    // Standardmäßig Amsterdam anzeigen
+    // 🟢 Standardmäßig: Amsterdam anzeigen
     updateChart("Amsterdam");
   })
   .catch(error => {
-    console.error('Error:', error);
+    console.error("Fehler beim Laden der Daten:", error);
   });
+
+
 
 
 

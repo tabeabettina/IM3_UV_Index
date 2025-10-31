@@ -14,34 +14,39 @@ html, body {
   background-color: rgb(175, 175, 255);
 }
 
+/* === LAYOUT === */
 .layout {
   display: flex;
-  flex-wrap: wrap;
   height: 100vh;
   width: 100%;
 }
 
-.left, .right {
-  flex: 1 1 50%;
+.left {
+  width: 40%;
   display: flex;
   flex-direction: column;
-  min-width: 320px;
+}
+
+.right {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* === LEFT TOP === */
 .left-top {
-  flex: 0 0 25vh;
+  flex: 0 0 25%;
   background-color: #a7c7ff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .title {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -55,14 +60,19 @@ html, body {
   height: auto;
 }
 
+.subtitle {
+  text-align: center;
+}
+
 .subtitle h2 {
   font-size: clamp(1.5rem, 3vw, 3.5rem);
-  text-shadow: 0.15em 0.15em 0.25em rgba(247, 179, 179, 1);
+  text-shadow: 0.15em 0.15em 0.25em rgba(247,179,179,1);
 }
 
 /* === LOCATION DROPDOWN === */
 .location-dropdown {
   position: relative;
+  display: inline-block;
   margin-top: 1rem;
 }
 
@@ -77,6 +87,7 @@ html, body {
 }
 
 #dropdownMenu {
+  display: none;
   position: absolute;
   top: 110%;
   left: 50%;
@@ -102,6 +113,10 @@ html, body {
   background-color: rgb(230, 255, 230);
 }
 
+#dropdownMenu.show {
+  display: block;
+}
+
 /* === LEFT BOTTOM === */
 .left-bottom {
   flex: 1;
@@ -109,18 +124,42 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.europa-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .europa-container img {
-  width: 35vw;
-  max-width: 600px;
+  width: 75%;
   height: auto;
   object-fit: contain;
 }
 
+/* === MARKER === */
+.marker {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 2;
+}
+
+.marker:hover {
+  transform: translate(-50%, -50%) scale(1.3);
+}
+
 /* === RIGHT TOP === */
 .right-top {
-  flex: 0 0 15vh;
+  flex: 0 0 15%;
   background-color: #ffe59d;
   display: flex;
   justify-content: flex-end;
@@ -130,32 +169,51 @@ html, body {
 
 .button-container {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
 }
 
 .karte-button,
 .analyse-button {
-  flex: 1 1 45%;
-  min-width: 120px;
-  padding: 0.6rem 1.2rem;
+  height: 50px;
+  width: 150px;
   border-radius: 10px;
-  border: 0.3rem solid white;
+  border: 5px white solid;
   font-size: clamp(1rem, 1.5vw, 1.4rem);
   font-weight: bold;
   cursor: pointer;
 }
 
 .karte-button {
-  background-color: rgb(255, 146, 138);
-}
-
-.analyse-button {
   background-color: rgb(189, 189, 189);
   color: rgb(105, 105, 105);
 }
 
+.analyse-button {
+  background-color: rgb(255, 146, 138);
+}
+
 /* === CHART === */
+
+.chart-container {
+  width: 90%;
+  height: 60%; /* Chart nimmt etwa 60% der rechten Seite ein */
+  background-color: white;
+  border: 8px solid white;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#myChart {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
 .right-middle {
   flex: 1;
   background-color: #fff2cc;
@@ -166,33 +224,40 @@ html, body {
 
 .chart-container {
   width: min(90%, 1000px);
-  height: auto;
 }
 
 #myChart {
   width: 100%;
   height: auto;
-  background-color: white;
 }
 
-/* === UV INFO === */
+/* === RIGHT BOTTOM === */
 .right-bottom {
-  flex: 0 0 25vh;
+  flex: 0 0 25%;
   background-color: #c8e1d3;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+
+
+/* === UV-Container (oben oder seitlich vom Chart) === */
 .uv-container {
-  width: min(90%, 900px);
+  width: 90%;
+  height: auto;
   background-color: rgb(145, 255, 186);
-  border: 0.6rem solid white;
-  border-radius: 1.5rem;
-  padding: 2rem;
+  border: 8px solid white;
+  border-radius: 20px;
+  padding: 2%;
+  box-sizing: border-box;
   text-align: center;
-  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
 
 .uv-container h3 {
   font-size: clamp(1.8rem, 2.5vw, 2.8rem);
@@ -200,7 +265,8 @@ html, body {
 }
 
 .uv-container h2 {
-  font-size: clamp(1.4rem, 2vw, 2.2rem);
+  font-size: clamp(1.2rem, 2vw, 2.2rem);
+  font-style: normal;
   margin-top: 0.5rem;
 }
 
@@ -208,7 +274,9 @@ html, body {
   font-size: clamp(1rem, 1.3vw, 1.2rem);
   font-style: italic;
   margin-top: 0.5rem;
-}
+} 
+
+
 
 /* === MEDIA QUERIES === */
 @media (max-width: 1024px) {
@@ -216,10 +284,12 @@ html, body {
   .left, .right { width: 100%; }
   .title { flex-direction: column; }
   .subtitle { text-align: center; }
+  .europa-container img { width: 90%; }
 }
 
 @media (max-width: 600px) {
-  .button-container { justify-content: center; }
+  .button-container { justify-content: center; flex-wrap: wrap; }
   .karte-button, .analyse-button { flex: 1 1 100%; }
   .uv-container { width: 90%; padding: 1rem; }
+  #locationButton { font-size: 1rem; }
 }
