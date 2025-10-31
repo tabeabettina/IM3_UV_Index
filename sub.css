@@ -14,6 +14,11 @@ html, body {
   background-color: rgb(175, 175, 255);
 }
 
+@font-face {
+  font-family: "MuseoModerno";
+  src: url(MuseoModerno/static/MuseoModerno-Medium.ttf);
+}
+
 /* === LAYOUT === */
 .layout {
   display: flex;
@@ -183,12 +188,12 @@ html, body {
   cursor: pointer;
 }
 
-.karte-button {
+.analyse-button {
   background-color: rgb(189, 189, 189);
   color: rgb(105, 105, 105);
 }
 
-.analyse-button {
+.karte-button {
   background-color: rgb(255, 146, 138);
 }
 
