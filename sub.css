@@ -194,9 +194,17 @@ html, body {
 
 /* === CHART === */
 
+.right-middle {
+  flex: 1;
+  background-color: #fff2cc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .chart-container {
   width: 90%;
-  height: 60%; /* Chart nimmt etwa 60% der rechten Seite ein */
+  height: auto; /* Chart nimmt etwa 60% der rechten Seite ein */
   background-color: white;
   border: 8px solid white;
   border-radius: 20px;
@@ -214,22 +222,16 @@ html, body {
 }
 
 
-.right-middle {
-  flex: 1;
-  background-color: #fff2cc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.chart-container {
+
+/* .chart-container {
   width: min(90%, 1000px);
 }
 
 #myChart {
   width: 100%;
   height: auto;
-}
+} */
 
 /* === RIGHT BOTTOM === */
 .right-bottom {
@@ -245,7 +247,7 @@ html, body {
 /* === UV-Container (oben oder seitlich vom Chart) === */
 .uv-container {
   width: 90%;
-  height: auto;
+  height: 80%;
   background-color: rgb(145, 255, 186);
   border: 8px solid white;
   border-radius: 20px;
@@ -265,10 +267,11 @@ html, body {
 }
 
 .uv-container h2 {
-  font-size: clamp(1.2rem, 2vw, 2.2rem);
-  font-style: normal;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-style: normal; 
   margin-top: 0.5rem;
 }
+
 
 .uv-container p {
   font-size: clamp(1rem, 1.3vw, 1.2rem);
